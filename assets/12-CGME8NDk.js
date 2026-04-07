@@ -1,0 +1,46 @@
+var e=`---
+title: "Techno — Hypnotic Drums, Dark Basslines, Groove"
+duration: 120
+level: 6
+levelLabel: "LVL 6"
+levelColor: "#818cf8"
+videos:
+  - id: "BQuAPn-gOdg"
+    title: "How to make Techno in Ableton Live (Beginners) — Sample Focus"
+  - id: "Fglyu4PFQwY"
+    title: "Ableton Live Mix Deconstruction: Drums & Bass — Pointblank"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What BPM range is standard for techno music?"
+      options: ["90–110", "120–135", "138–150", "160–180"]
+      answer: 1
+      explanation: "Techno sits between 120–135 BPM. 130 BPM is a common sweet spot — energetic on the dance floor but not frantic."
+    - type: multiple-choice
+      question: "What is the defining rhythmic pattern of techno?"
+      options: ["Swing hi-hats on every offbeat", "Steady 4/4 kick on every beat with layered percussion", "Kick on beat 1 and 3 only", "No kick — only hi-hats"]
+      answer: 1
+      explanation: "Techno's engine is a relentless 4-on-the-floor kick drum, with industrial percussion and hypnotic hi-hat patterns layered on top."
+---
+
+## Phase 1 — Learn (35 min)
+
+- Techno: 130 BPM, 4/4 kick on every beat (four-on-the-floor). Industrial, minimal, hypnotic.
+- Drums: layer 2–3 kicks (body + click), clap or rimshot on beat 3, rolling hi-hats with velocity randomization.
+- Bassline: mono bass, short attack, playing repeated 16th-note patterns. Movement via LFO or filter automation.
+- Ableton: use the Drum Rack for drums, a separate Wavetable track for the mono bass.
+
+## Phase 2 — Do (70 min)
+
+- New project. Set BPM to 130.
+- Build a 4-bar drum loop in Drum Rack: kick on all 4 beats, hi-hats on every 8th note (vary velocity), snare/clap on beat 3.
+- Add industrial percussion (metal hits, claps) to give it texture.
+- Create a mono bassline on a Wavetable track — sine wave, 16th-note pattern, automate filter cutoff over 8 bars.
+- Arrange: 32-bar loop that evolves — add/remove elements every 8 bars. Export.
+
+## 15-Min Review
+
+Play in a dark room with eyes closed. Does it feel hypnotic? Techno works when you stop thinking about individual elements and feel the groove as one. If something sticks out too much, bring it down in the mix or add more reverb to push it back.
+`;export{e as default};

@@ -1,0 +1,43 @@
+var e=`---
+title: "Trance + Ambient — Texture and Atmosphere"
+duration: 120
+level: 5
+levelLabel: "LVL 5"
+levelColor: "#a78bfa"
+videos:
+  - id: "cIBcq1DJzG8"
+    title: "Arpeggiators: 5 Simple Tips for More Interesting Patterns — EDMProd"
+  - id: "5yrSu9NFJ_4"
+    title: "Ableton Live Mix Deconstruction: Part 3 — Pointblank Music School"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What BPM is standard for trance music?"
+      options: ["128", "132", "138", "145"]
+      answer: 2
+      explanation: "138 BPM is the sweet spot for trance — fast enough for energy, slow enough for the long melodic buildups."
+    - type: multiple-choice
+      question: "What FL Studio tool creates auto-generated arpeggios?"
+      options: ["Piano Roll", "FL Arpeggiator", "Step Sequencer", "Pattern Blocks"]
+      answer: 1
+      explanation: "The FL Arpeggiator MIDI effect plays notes in a held chord as a sequence automatically."
+---
+
+## Phase 1 — Learn (40 min)
+
+- Trance: 138 BPM, arpeggio lead through a minor scale, long reverb on everything.
+- FL Arpeggiator: set to 1/16, minor scale lock, 2 octaves.
+- Ambient: no drums needed. Pads with 2–4s attack, massive reverb, slow LFO on filter.
+
+## Phase 2 — Do (65 min)
+
+- Part A (45 min): Trance — 138 BPM, arpeggio lead, kick+bass, 2-min arrangement.
+- Part B (20 min): Ambient — one pad sound, huge reverb, slow filter automation. No drums.
+- Export both. You now have 5 genre sketches.
+
+## 15-Min Review
+
+Listen to the ambient piece with your eyes closed. Does it feel like a space? Good ambient evolves slowly. If nothing changes in the first 30 seconds, add subtle filter automation.
+`;export{e as default};

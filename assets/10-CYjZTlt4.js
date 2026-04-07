@@ -1,0 +1,43 @@
+var e=`---
+title: "Polish + Portfolio — Your Best Track, Finished"
+duration: 120
+level: 5
+levelLabel: "LVL 5"
+levelColor: "#a78bfa"
+videos:
+  - id: "QqlsatXZiIw"
+    title: "Glue Compressor: Why You Should Apply It To Busses — EDMProd"
+  - id: "Fglyu4PFQwY"
+    title: "Ableton Live Mix Deconstruction: Part 1 — Pointblank Music School"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "In Ableton mastering, what should be the last device in the master chain?"
+      options: ["EQ Eight", "Compressor", "Limiter", "Glue Compressor"]
+      answer: 2
+      explanation: "The Limiter should always be last in the chain. It catches any peaks that slip through and sets the final ceiling."
+    - type: multiple-choice
+      question: "What is the Glue Compressor on the master used for?"
+      options: ["Heavy limiting", "Gentle bus compression to make the mix feel cohesive", "Adding saturation", "Removing high frequencies"]
+      answer: 1
+      explanation: "The Glue Compressor with gentle settings (2:1, slow attack) adds a subtle 'glue' that makes all your tracks feel like one coherent mix."
+---
+
+## Phase 1 — Choose + Fix (60 min)
+
+- Listen to all tracks from Sessions 4, 7, 8, 9 back to back. Pick the strongest one.
+- Open it. List the top 3 things that bother you. Fix only those 3. Resist fixing everything.
+- Check: gain staging (nothing clipping before the master), reverb balance, automation that builds tension.
+
+## Phase 2 — Master + Publish (55 min)
+
+- Put Glue Compressor on master (gentle — 2:1, slow attack, threshold to 2–3dB of GR).
+- Put Limiter last on master. Set ceiling to -1dB. Adjust input gain until the meter shows activity.
+- A/B vs a reference track. Export WAV. Upload to SoundCloud or share for feedback.
+
+## Final Retrospective — 15 Min
+
+Compare your Session 1 loop to your Session 10 track. List 5 things you can now do that you couldn't before. That list is your proof of progress. Set your 3 goals for the next 20 hours — and decide: FL Studio or Ableton for your main workflow?
+`;export{e as default};

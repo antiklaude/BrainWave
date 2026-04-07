@@ -1,0 +1,42 @@
+var e=`---
+title: "Trap Track — Drum Rack 808, Hi-Hat Rolls, Automation"
+duration: 120
+level: 5
+levelLabel: "LVL 5"
+levelColor: "#a78bfa"
+videos:
+  - id: "QtvbSqp71sA"
+    title: "Ableton Tutorial: Trap Music Patterns — Dubspot"
+  - id: "b5JILpJZUQQ"
+    title: "How to Make a Quick Trap Beat — Busy Works Beats"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "In Ableton, how do you randomize hi-hat velocities for a human feel?"
+      options: ["Use LFO", "Right-click notes → Randomize Velocity", "Adjust in mixer", "Use Auto Filter"]
+      answer: 1
+      explanation: "Right-click on selected notes in the Piano Roll and choose Randomize Velocity to add subtle variation that makes patterns feel human."
+    - type: fill-blank
+      question: "In Ableton, the 808 bass is typically built using the ___ synthesizer with a sine wave."
+      answer: "wavetable"
+      explanation: "Wavetable (Ableton's flagship synth) with a sine wave + long release + pitch envelope creates the classic 808 bass."
+---
+
+## Phase 1 — Learn (35 min)
+
+- Trap tempo: 140 BPM. 808 = a separate MIDI track with Wavetable (sine wave, long release, pitch envelope).
+- Hi-hat rolls in the Piano Roll: 1/32 notes with randomized velocity (right-click → Randomize Velocity).
+- Pitch automation: draw an automation lane on the 808 track, bend the pitch down at the end of each bar.
+
+## Phase 2 — Do (70 min)
+
+- New project. Drum Rack with kick on beat 1, snare on beat 3, rolling hi-hats across the bar.
+- Separate Wavetable track for the 808. Make it slide and growl with pitch automation.
+- One dark melody clip. Record to Arrangement. Arrange to 2 min. Export.
+
+## 15-Min Review
+
+Does the 808 feel like it's in the same key as the melody? If not, select the 808 MIDI clip, check the root note, and transpose it to match. A detuned 808 is the #1 mistake beginner trap producers make.
+`;export{e as default};

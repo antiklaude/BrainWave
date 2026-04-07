@@ -1,0 +1,47 @@
+var e=`---
+title: "House Music — Four-on-the-Floor, Basslines, Chords"
+duration: 120
+level: 6
+levelLabel: "LVL 6"
+levelColor: "#818cf8"
+videos:
+  - id: "9ALv_DKuAnw"
+    title: "How To Make EPIC Deep House Music in Ableton — Ultrasonic"
+  - id: "zixYrfSziKk"
+    title: "How To Make Great House Drums — 5 Tips — The Audio Journey"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What BPM is classic house music?"
+      options: ["110–115", "120–128", "130–138", "140–150"]
+      answer: 1
+      explanation: "House music lives between 120–128 BPM. 124 BPM is a common target — it feels warm, groovy, and keeps people moving without feeling rushed."
+    - type: multiple-choice
+      question: "In house music, where does the open hi-hat typically land?"
+      options: ["On every beat", "On the offbeat (the 'and' between beats)", "On beat 3 only", "On beats 2 and 4"]
+      answer: 1
+      explanation: "The offbeat open hi-hat is the signature groove element of house. It falls on the 'and' between each kick, creating that classic rolling feel."
+---
+
+## Phase 1 — Learn (40 min)
+
+- House: 124 BPM, four-on-the-floor kick, open hi-hat on the offbeat, clap on 2 and 4.
+- Bassline: looping 4-bar pattern, often plays on the same notes as the chord root. Warm, round tone.
+- Chords: simple 3–4 note chords (minor 7th, major 7th). Stab rhythm on upbeats adds groove.
+- Use Ableton's Chord MIDI effect to play chords with one finger.
+
+## Phase 2 — Do (65 min)
+
+- New project at 124 BPM.
+- Build the drum foundation in Drum Rack: kick on every beat, open hi-hat on offbeats, clap on 2 and 4. Add a ride or shaker for groove.
+- Create a warm bass on Wavetable (sine or sub). 4-bar loop following the chord roots.
+- Write a 4-chord progression (e.g. Am7 → Dm7 → G7 → Cmaj7). Use the Chord MIDI effect.
+- Add chord stabs — short notes on the upbeats. Add Sidechain compression from kick to bass.
+- Arrange: 8-bar intro (drums only) → 16-bar full groove → repeat. Export.
+
+## 15-Min Review
+
+Play your track and compare it to a house record you like. Does the groove feel alive? House lives in the feel, not the complexity. If the kick feels weak, layer a sub-punch under it. If it's boring, try adding a percussive element (shaker, conga) on a Return track.
+`;export{e as default};
