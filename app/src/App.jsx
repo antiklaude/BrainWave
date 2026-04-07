@@ -6,7 +6,7 @@ import NotFound from './pages/NotFound'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/BrainWave">
       <AppShell>
         <Routes>
           <Route path="/" element={<HomePage />} />
