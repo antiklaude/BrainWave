@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" style="
+  --accent:  #a78bfa;
+  --accent2: #6ee7b7;
+  --accent3: #fbbf24;
+  --accent4: #f472b6;
+  --red:     #f87171;
+">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FL Studio 20 — Zero to Hero · BrainWave</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/brainwave.css">
+  <script src="../assets/js/theme.js"></script>
+</head>
+
+<body>
+
+  <!-- ── NAV ──────────────────────────────────────────────── -->
+  <nav class="bw-nav">
+    <div class="bw-nav-inner">
+      <a href="../index.html" class="bw-nav-logo">
+        <span class="logo-dot"></span>BrainWave
+      </a>
+      <div class="bw-nav-actions">
+        <a href="../index.html" class="bw-back-btn">← All Courses</a>
+        <button id="bw-theme-btn" class="bw-theme-btn" onclick="toggleTheme()" title="Toggle dark / light mode">☀</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrapper">
+
+    <!-- ── HEADER ────────────────────────────────────────── -->
+    <header>
+      <div class="header-tag">FL Studio 20 · Learning Plan</div>
+      <h1>Zero to <span>Hero</span><br>in 20 Hours</h1>
+      <p class="header-sub">The 20% of production knowledge that drives 80% of results. 10 two-hour sessions,
+        built for EDM, Trap, LoFi, Trance, and Ambient.</p>
+      <div class="stats-row">
+        <div class="stat"><span class="stat-num">20</span><span class="stat-lbl">Total Hours</span></div>
+        <div class="stat"><span class="stat-num">10</span><span class="stat-lbl">Sessions</span></div>
+        <div class="stat"><span class="stat-num">5</span><span class="stat-lbl">Levels</span></div>
+        <div class="stat"><span class="stat-num">5</span><span class="stat-lbl">Genres</span></div>
+        <div class="course-progress-stat">
+          <span class="course-progress-label" id="bw-progress-label">0/10 sessions complete</span>
+          <div class="course-progress-bar-track">
+            <div class="course-progress-bar-fill" id="bw-progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── TABS ──────────────────────────────────────────── -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('overview', this)">Overview</button>
+      <button class="tab" onclick="switchTab('ladder', this)">Learning Ladder</button>
+      <button class="tab" onclick="switchTab('sessions', this)">Sessions</button>
+    </div>
+
+    <!-- ── OVERVIEW ──────────────────────────────────────── -->
+    <div id="panel-overview" class="panel active">
+      <div class="principles-grid">
+        <div class="principle">
+          <span class="principle-icon">⚡</span>
+          <h4>The 20/80 Rule</h4>
+          <p>80% of finished tracks use: a basic beat, one melody, bass, reverb + delay, and basic mixing.
+            Master these before touching advanced concepts.</p>
+        </div>
+        <div class="principle">
+          <span class="principle-icon">🎯</span>
+          <h4>Project-First Learning</h4>
+          <p>Every session ends with something you can hit play on. No theory-only sessions. You learn by
+            doing, not watching tutorials for hours.</p>
+        </div>
+        <div class="principle">
+          <span class="principle-icon">🔄</span>
+          <h4>Genre Rotation</h4>
+          <p>Start with Trap and LoFi (slower tempos, fewer elements). EDM and Trance come mid-plan. Ambient
+            unlocks creative freedom once fundamentals are solid.</p>
+        </div>
+        <div class="principle">
+          <span class="principle-icon">📝</span>
+          <h4>15-Min Review Ritual</h4>
+          <p>End every session: play your project back in full, write one thing you nailed, one thing that
+            sounds off, and set your next session's starting goal.</p>
+        </div>
+      </div>
+      <div class="genre-row">
+        <span class="genre-tag" style="color:#a78bfa;border-color:#a78bfa30;background:#a78bfa10;">Trap</span>
+        <span class="genre-tag" style="color:#6ee7b7;border-color:#6ee7b730;background:#6ee7b710;">LoFi</span>
+        <span class="genre-tag" style="color:#fbbf24;border-color:#fbbf2430;background:#fbbf2410;">EDM</span>
+        <span class="genre-tag" style="color:#f472b6;border-color:#f472b630;background:#f472b610;">Trance</span>
+        <span class="genre-tag" style="color:#7dd3fc;border-color:#7dd3fc30;background:#7dd3fc10;">Ambient</span>
+      </div>
+    </div>
+
+    <!-- ── LADDER ─────────────────────────────────────────── -->
+    <div id="panel-ladder" class="panel">
+
+      <div class="level-card">
+        <div class="level-header" onclick="toggleAccordion(this)">
+          <span class="chevron">▶</span>
+          <span class="level-num" style="background:#6ee7b715;color:#6ee7b7;border:1px solid #6ee7b730;">LVL 1</span>
+          <span class="level-title-text">Orientation — survive FL Studio</span>
+          <span class="level-milestone-text">Milestone: a 4-bar beat plays</span>
+        </div>
+        <div class="level-body">
+          <ul>
+            <li><span class="li-dot" style="background:#6ee7b7;"></span>FL Studio layout: Channel Rack, Piano Roll, Playlist, Mixer</li>
+            <li><span class="li-dot" style="background:#6ee7b7;"></span>Step Sequencer: build a 4-bar drum pattern</li>
+            <li><span class="li-dot" style="background:#6ee7b7;"></span>BPM and time signature basics</li>
+            <li><span class="li-dot" style="background:#6ee7b7;"></span>Load and play a stock sample or preset</li>
+            <li><span class="li-dot" style="background:#6ee7b7;"></span>Export a WAV — your first file to show</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="level-card">
+        <div class="level-header" onclick="toggleAccordion(this)">
+          <span class="chevron">▶</span>
+          <span class="level-num" style="background:#7dd3fc15;color:#7dd3fc;border:1px solid #7dd3fc30;">LVL 2</span>
+          <span class="level-title-text">Core ingredients — beat + melody + bass</span>
+          <span class="level-milestone-text">Milestone: a 1-min loop with 3 elements</span>
+        </div>
+        <div class="level-body">
+          <ul>
+            <li><span class="li-dot" style="background:#7dd3fc;"></span>Piano Roll: drawing and editing MIDI notes</li>
+            <li><span class="li-dot" style="background:#7dd3fc;"></span>Choosing the right scale (minor = trap/LoFi, major = EDM)</li>
+            <li><span class="li-dot" style="background:#7dd3fc;"></span>Bass fundamentals: sidechaining to kick</li>
+            <li><span class="li-dot" style="background:#7dd3fc;"></span>Velocity and note length for human feel</li>
+            <li><span class="li-dot" style="background:#7dd3fc;"></span>Basic synth: Serum or 3xOsc, one patch from scratch</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="level-card">
+        <div class="level-header" onclick="toggleAccordion(this)">
+          <span class="chevron">▶</span>
+          <span class="level-num" style="background:#fbbf2415;color:#fbbf24;border:1px solid #fbbf2430;">LVL 3</span>
+          <span class="level-title-text">Structure — full tracks, not just loops</span>
+          <span class="level-milestone-text">Milestone: 2–3 min track with intro, drop, outro</span>
+        </div>
+        <div class="level-body">
+          <ul>
+            <li><span class="li-dot" style="background:#fbbf24;"></span>Playlist view: arrangement from loop to track</li>
+            <li><span class="li-dot" style="background:#fbbf24;"></span>Energy flow: buildup, drop, breakdown structure</li>
+            <li><span class="li-dot" style="background:#fbbf24;"></span>Transitions: risers, sweeps, cymbal swells</li>
+            <li><span class="li-dot" style="background:#fbbf24;"></span>Automation: filter sweeps, volume rides</li>
+            <li><span class="li-dot" style="background:#fbbf24;"></span>Layering: 2–3 synths without mudding the mix</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="level-card">
+        <div class="level-header" onclick="toggleAccordion(this)">
+          <span class="chevron">▶</span>
+          <span class="level-num" style="background:#f472b615;color:#f472b6;border:1px solid #f472b630;">LVL 4</span>
+          <span class="level-title-text">Mixing — your track sounds clean</span>
+          <span class="level-milestone-text">Milestone: plays well on phones + headphones</span>
+        </div>
+        <div class="level-body">
+          <ul>
+            <li><span class="li-dot" style="background:#f472b6;"></span>FL Mixer: routing channels, gain staging</li>
+            <li><span class="li-dot" style="background:#f472b6;"></span>EQ: cutting mud (low-end) and harsh frequencies</li>
+            <li><span class="li-dot" style="background:#f472b6;"></span>Compression: punchy drums, controlled bass</li>
+            <li><span class="li-dot" style="background:#f472b6;"></span>Reverb + Delay: space without washing out</li>
+            <li><span class="li-dot" style="background:#f472b6;"></span>Stereo width and panning fundamentals</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="level-card">
+        <div class="level-header" onclick="toggleAccordion(this)">
+          <span class="chevron">▶</span>
+          <span class="level-num" style="background:#a78bfa15;color:#a78bfa;border:1px solid #a78bfa30;">LVL 5</span>
+          <span class="level-title-text">Genre mastery — signature sounds per genre</span>
+          <span class="level-milestone-text">Milestone: one track in each target genre</span>
+        </div>
+        <div class="level-body">
+          <ul>
+            <li><span class="li-dot" style="background:#a78bfa;"></span>Trap: 808 design, hi-hat rolls, pitch automation</li>
+            <li><span class="li-dot" style="background:#a78bfa;"></span>LoFi: vinyl crackle, tape saturation, jazz chords</li>
+            <li><span class="li-dot" style="background:#a78bfa;"></span>EDM: supersaw lead, pumping sidechain, large reverb drops</li>
+            <li><span class="li-dot" style="background:#a78bfa;"></span>Trance: arpeggiated leads, 138 BPM, long buildups</li>
+            <li><span class="li-dot" style="background:#a78bfa;"></span>Ambient: drone pads, granular textures, slow evolution</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /panel-ladder -->
+
+    <!-- ── SESSIONS ───────────────────────────────────────── -->
+    <div id="panel-sessions" class="panel">
+
+      <!-- SESSION 1 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s01" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 01</span>
+          <span class="session-title-text">DAW orientation + first beat</span>
+          <span class="session-lvl" style="background:#6ee7b715;color:#6ee7b7;border:1px solid #6ee7b730;">LVL 1</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://youtu.be/pDIsEZsalAo">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/pDIsEZsalAo/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Complete Beginner Basics — In The Mix</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=Est8ZMlG_9Y">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/Est8ZMlG_9Y/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">FL Studio 21 Full Guide — Kevin Stratvert</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (45 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>FL Studio UI tour: Channel Rack, Piano Roll, Playlist, Mixer</div>
+            <div class="task-item"><span class="task-arrow">→</span>BPM = 140 (trap/default). Set it. Don't question it yet.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Load a kick, snare, hi-hat from stock samples</div>
+            <div class="phase-label">Phase 2 — Do (60 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Build a 4-bar trap drum pattern in the Step Sequencer</div>
+            <div class="task-item"><span class="task-arrow">→</span>Arrange it in the Playlist (16 bars, looping)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Export as WAV. Done. You just made a track.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Play your beat back. Does the kick hit every bar? Can you hear the snare on beat 2 and 4? Note one thing you want to change next session.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 2 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s02" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 02</span>
+          <span class="session-title-text">Melody + Piano Roll basics</span>
+          <span class="session-lvl" style="background:#7dd3fc15;color:#7dd3fc;border:1px solid #7dd3fc30;">LVL 2</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=Kzd_ORMXvdA">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/Kzd_ORMXvdA/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Piano Roll Tutorial</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=V3AGrAaGkXU">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/V3AGrAaGkXU/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">LoFi Melody Guide</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (40 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Open Piano Roll. Understand note grid, velocity bars, snap.</div>
+            <div class="task-item"><span class="task-arrow">→</span>C minor pentatonic: C, Eb, F, G, Bb — only these 5 notes.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Load a LoFi piano preset (or use FL Keys plugin).</div>
+            <div class="phase-label">Phase 2 — Do (65 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Draw an 8-note melody using only the pentatonic scale.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Vary note lengths — some short, some held. Avoid robot feel.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add it to your beat from Session 1. Play together.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Does the melody feel good or robotic? Hum it back — if you can't hum it, it's too complicated. Simplify.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 3 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s03" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 03</span>
+          <span class="session-title-text">Bass + Sidechaining</span>
+          <span class="session-lvl" style="background:#7dd3fc15;color:#7dd3fc;border:1px solid #7dd3fc30;">LVL 2</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=pJXUMu9bAZI">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/pJXUMu9bAZI/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">808 Bass in FL Studio</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=3O8i_hd_9qU">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/3O8i_hd_9qU/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Sidechain Explained</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (40 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Bass 101: bass note = root note of your chord/scale (C for C minor).</div>
+            <div class="task-item"><span class="task-arrow">→</span>Sidechaining: kick ducks the bass. Use Fruity Peak Controller.</div>
+            <div class="task-item"><span class="task-arrow">→</span>808 bass: long sustained note, pitch-slides — signature of trap.</div>
+            <div class="phase-label">Phase 2 — Do (65 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Create a bass line in Piano Roll — follow the kick rhythm closely.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Set up basic sidechain: kick triggers bass volume to duck.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add bass to sessions 1+2 project. You now have 3 elements.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Turn the bass way up. Does it clash with the kick, or complement it? The kick and bass should feel like one punch, not two separate sounds.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 4 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s04" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 04</span>
+          <span class="session-title-text">First full LoFi track — arrangement</span>
+          <span class="session-lvl" style="background:#fbbf2415;color:#fbbf24;border:1px solid #fbbf2430;">LVL 3</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=bTYkuS0Ea5o">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/bTYkuS0Ea5o/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Make LoFi Hip Hop in FL Studio</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (30 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Track structure: Intro (8 bars) → Main (16) → Bridge (8) → Main (16) → Outro.</div>
+            <div class="task-item"><span class="task-arrow">→</span>LoFi essentials: vinyl crackle sample, lo-pass filter, tape warble.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Using the Playlist for arrangement, not just looping.</div>
+            <div class="phase-label">Phase 2 — Do (75 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Take sessions 1–3 loops and arrange into a 2-min LoFi track.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add a vinyl crackle sample looped across the full track.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add a low-pass filter sweep going into the main section.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Export. This is your first real finished track.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Play the full track start to finish. Does it build and release? Where did you get bored? That section needs something added or removed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 5 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s05" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 05</span>
+          <span class="session-title-text">Intro to mixing — EQ + Compression</span>
+          <span class="session-lvl" style="background:#f472b615;color:#f472b6;border:1px solid #f472b630;">LVL 4</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=LM4fKUm6SsI">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/LM4fKUm6SsI/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">EQ for Beginners</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=8lQHV7FRNYs">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/8lQHV7FRNYs/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">FL Mixer Routing</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (45 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>FL Mixer: route each instrument to its own channel.</div>
+            <div class="task-item"><span class="task-arrow">→</span>EQ: cut below 40Hz on everything except bass/kick. Cut 200–400Hz mud.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Compression on drums: attack 10ms, release 60ms, ratio 4:1.</div>
+            <div class="phase-label">Phase 2 — Do (60 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Open your LoFi track. Route all instruments to the mixer.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Apply EQ cuts to kick, snare, melody. Listen before and after.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add light compression to the drum bus. Compare bypass vs active.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Solo each instrument. Does anything sound harsh, boxy, or muddy on its own? A good mix starts with each element sounding clean in isolation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 6 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s06" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 06</span>
+          <span class="session-title-text">Reverb, delay + space design</span>
+          <span class="session-lvl" style="background:#f472b615;color:#f472b6;border:1px solid #f472b630;">LVL 4</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=nXkFXJl4b3A">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/nXkFXJl4b3A/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Reverb &amp; Delay in FL Studio</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (40 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Reverb adds size. Short for drums, longer for pads and synths.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Delay: rhythmic echo. Quarter-note delay synced to BPM.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Rule: if reverb sounds good at 100%, the real setting is 30%.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Send/Return routing in FL Mixer for shared reverb bus.</div>
+            <div class="phase-label">Phase 2 — Do (65 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add Fruity Reeverb 2 to melody send channel. Decay 1.5s.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add quarter-note delay to a hi-hat or synth stab.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Build an ambient pad: any synth + heavy reverb + slow attack.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Solo the wet reverb channel. If you clearly hear the melody through the reverb tail alone, it's too loud. Reverb should feel like air around the note, not a second instrument.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 7 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s07" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 07</span>
+          <span class="session-title-text">Trap track — 808s, hi-hat rolls, automation</span>
+          <span class="session-lvl" style="background:#a78bfa15;color:#a78bfa;border:1px solid #a78bfa30;">LVL 5</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=IHCqW0tVHKc">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/IHCqW0tVHKc/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">808 Trap Beat From Scratch</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=4t9NnLNXgFI">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/4t9NnLNXgFI/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Hi-Hat Rolls in FL Studio</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (35 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Trap tempo: 140 BPM. 808 note: long, pitch-slides using portamento.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Hi-hat rolls: 1/32 triplets, velocity randomized (not all the same volume).</div>
+            <div class="task-item"><span class="task-arrow">→</span>Automation clip: pitch-bend the 808 down at end of each bar.</div>
+            <div class="phase-label">Phase 2 — Do (70 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>New project. Kick on 1, snare on 3, rolling hi-hats.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add 808 bass with pitch automation. Let it slide and growl.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add one dark minor melody. Arrange to 2 min. Export.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Does the 808 hit you in the chest? If you can't feel it on speakers, it needs more low-end. Does it clash with the melody? Tune the 808 root note to match your key.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 8 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s08" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 08</span>
+          <span class="session-title-text">EDM track — supersaw, drops, energy design</span>
+          <span class="session-lvl" style="background:#a78bfa15;color:#a78bfa;border:1px solid #a78bfa30;">LVL 5</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=2MCzwFcvGm0">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/2MCzwFcvGm0/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">EDM Track From Scratch</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=vJHm3l4yfek">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/vJHm3l4yfek/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Supersaw Sound Design in FL Studio</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (40 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>EDM tempo: 128 BPM. Supersaw = multiple detuned oscillators stacked.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Build a supersaw in Serum or 3xOsc: 3 unison voices, slight detune, stereo spread.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Drop architecture: filter closes over 8 bars → fill → 1-beat silence → drop.</div>
+            <div class="phase-label">Phase 2 — Do (65 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>128 BPM. 4/4 kick on every beat. Clap on 2 and 4.</div>
+            <div class="task-item"><span class="task-arrow">→</span>4-chord progression + supersaw lead on top.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Build the drop using filter cutoff automation. Filter fully opens = the drop.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Arrange: 8 bar buildup → 16 bar drop → repeat. Export.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Play to the drop. Did you feel tension building? The moment the drop hits should feel like a release of pressure. If not, your buildup needs more filter movement and harder fills.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 9 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s09" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 09</span>
+          <span class="session-title-text">Trance + Ambient — texture and atmosphere</span>
+          <span class="session-lvl" style="background:#a78bfa15;color:#a78bfa;border:1px solid #a78bfa30;">LVL 5</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=S2mAPqnSzNI">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/S2mAPqnSzNI/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Trance Production FL Studio</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=gEVKIQdMPiA">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/gEVKIQdMPiA/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Ambient Music Basics</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (40 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Trance: 138 BPM, arpeggio lead through a minor scale, long reverb on everything.</div>
+            <div class="task-item"><span class="task-arrow">→</span>FL Arpeggiator: set to 1/16, minor scale lock, 2 octaves.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Ambient: no drums needed. Pads with 2–4s attack, massive reverb, slow LFO on filter.</div>
+            <div class="phase-label">Phase 2 — Do (65 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Part A (45 min): Trance — 138 BPM, arpeggio lead, kick+bass, 2-min arrangement.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Part B (20 min): Ambient — one pad sound, huge reverb, slow filter automation. No drums.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Export both. You now have 5 genre sketches.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Listen to the ambient piece with your eyes closed. Does it feel like a space? Good ambient evolves slowly. If nothing changes in the first 30 seconds, add subtle filter automation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 10 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s10" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 10</span>
+          <span class="session-title-text">Polish + portfolio — your best track, finished</span>
+          <span class="session-lvl" style="background:#a78bfa15;color:#a78bfa;border:1px solid #a78bfa30;">LVL 5</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=0OfWPdZggrY">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/0OfWPdZggrY/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Basic Mastering in FL Studio</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Choose + Fix (60 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Listen to all tracks from sessions 4, 7, 8, 9 back to back.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Pick your strongest. Open it. Fix the top 3 things that bother you.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Check: EQ on all channels, reverb balance, automation that builds energy.</div>
+            <div class="phase-label">Phase 2 — Master + Publish (55 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add Fruity Loudness Maximizer on master channel. Set ceiling to -1dB LUFS.</div>
+            <div class="task-item"><span class="task-arrow">→</span>A/B test: your mix vs a reference track in the same genre.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Export final WAV. Upload to SoundCloud or a producer Discord for feedback.</div>
+            <div class="review-box" style="border-left-color:var(--accent);">
+              <div class="review-box-label" style="color:var(--accent);">Final Retrospective — 15 Min</div>
+              <p>Compare your Session 1 beat to your Session 10 track. List 5 things you now know how to do that you didn't at the start. That list is your proof of progress. Set 3 goals for the next 20 hours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /panel-sessions -->
+
+    <footer>
+      <span>FL Studio 20 · 20-Hour Plan</span>
+      <span>10 sessions · 5 levels · 5 genres · <a href="../index.html">← BrainWave</a></span>
+    </footer>
+
+  </div><!-- /wrapper -->
+
+  <script src="../assets/js/progress.js"></script>
+  <script src="../assets/js/player.js"></script>
+  <script>
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+      document.getElementById('panel-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function toggleAccordion(header) {
+      var body    = header.nextElementSibling;
+      var chevron = header.querySelector('.chevron');
+      var isOpen  = body.classList.toggle('open');
+      chevron.classList.toggle('open', isOpen);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      bwInitProgress('fl-studio-20');
+    });
+  </script>
+
+</body>
+</html>

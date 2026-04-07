@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" style="
+  --accent:  #38bdf8;
+  --accent2: #34d399;
+  --accent3: #fbbf24;
+  --accent4: #f472b6;
+  --red:     #f87171;
+">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ableton Live 12 — Zero to Hero · BrainWave</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/brainwave.css">
+  <script src="../assets/js/theme.js"></script>
+</head>
+
+<body>
+
+  <!-- ── NAV ──────────────────────────────────────────────── -->
+  <nav class="bw-nav">
+    <div class="bw-nav-inner">
+      <a href="../index.html" class="bw-nav-logo">
+        <span class="logo-dot"></span>BrainWave
+      </a>
+      <div class="bw-nav-actions">
+        <a href="../index.html" class="bw-back-btn">← All Courses</a>
+        <button id="bw-theme-btn" class="bw-theme-btn" onclick="toggleTheme()" title="Toggle dark / light mode">☀</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrapper">
+
+    <!-- ── HEADER ────────────────────────────────────────── -->
+    <header>
+      <div class="header-tag">Ableton Live 12 · Learning Plan</div>
+      <h1>Zero to <span>Hero</span><br>in 20 Hours</h1>
+      <p class="header-sub">The 20% of production knowledge that drives 80% of results. 10 two-hour sessions,
+        built around Ableton's Session View, Arrangement View, and its unique clip-based workflow.</p>
+      <div class="stats-row">
+        <div class="stat"><span class="stat-num">20</span><span class="stat-lbl">Total Hours</span></div>
+        <div class="stat"><span class="stat-num">10</span><span class="stat-lbl">Sessions</span></div>
+        <div class="stat"><span class="stat-num">5</span><span class="stat-lbl">Levels</span></div>
+        <div class="stat"><span class="stat-num">5</span><span class="stat-lbl">Genres</span></div>
+        <div class="course-progress-stat">
+          <span class="course-progress-label" id="bw-progress-label">0/10 sessions complete</span>
+          <div class="course-progress-bar-track">
+            <div class="course-progress-bar-fill" id="bw-progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── TABS ──────────────────────────────────────────── -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('overview', this)">Overview</button>
+      <button class="tab" onclick="switchTab('ladder', this)">Learning Ladder</button>
+      <button class="tab" onclick="switchTab('sessions', this)">Sessions</button>
+    </div>
+
+    <!-- ── OVERVIEW ──────────────────────────────────────── -->
+    <div id="panel-overview" class="panel active">
+      <div class="principles-grid">
+        <div class="principle">
+          <span class="principle-icon">⚡</span>
+          <h4>Ableton's Key Difference</h4>
+          <p>Ableton has two views: Session View (clip-based looping, idea sketching) and Arrangement View
+            (timeline for finishing tracks). You must understand both. Most beginners only learn one and
+            wonder why they can't finish songs.</p>
+        </div>
+        <div class="principle">
+          <span class="principle-icon">🎯</span>
+          <h4>Session View First</h4>
+          <p>Start every project in Session View. Launch clips, experiment with loops, build your palette.
+            Once the ideas are working, record them into Arrangement View and shape the full track. This is
+            the Ableton-native workflow.</p>
+        </div>
+        <div class="principle">
+          <span class="principle-icon">🔄</span>
+          <h4>Genre Rotation</h4>
+          <p>Start with LoFi and Trap (slower BPM, fewer elements). Move to EDM and Trance mid-plan. Ambient
+            rewards you at the end — it's the genre where Ableton's Session View and clip launching genuinely shines.</p>
+        </div>
+        <div class="principle">
+          <span class="principle-icon">📝</span>
+          <h4>15-Min Review Ritual</h4>
+          <p>End every session: play your project from the top, write one thing you nailed, one thing that
+            sounds off, set your next session's opening goal. Skip this and your progress slows by half.</p>
+        </div>
+      </div>
+      <div class="genre-row">
+        <span class="genre-tag" style="color:#38bdf8;border-color:#38bdf830;background:#38bdf810;">Trap</span>
+        <span class="genre-tag" style="color:#34d399;border-color:#34d39930;background:#34d39910;">LoFi</span>
+        <span class="genre-tag" style="color:#fbbf24;border-color:#fbbf2430;background:#fbbf2410;">EDM</span>
+        <span class="genre-tag" style="color:#f472b6;border-color:#f472b630;background:#f472b610;">Trance</span>
+        <span class="genre-tag" style="color:#a78bfa;border-color:#a78bfa30;background:#a78bfa10;">Ambient</span>
+      </div>
+    </div>
+
+    <!-- ── LADDER ─────────────────────────────────────────── -->
+    <div id="panel-ladder" class="panel">
+
+      <div class="level-card">
+        <div class="level-header" onclick="toggleAccordion(this)">
+          <span class="chevron">▶</span>
+          <span class="level-num" style="background:#34d39915;color:#34d399;border:1px solid #34d39930;">LVL 1</span>
+          <span class="level-title-text">Orientation — survive Ableton Live 12</span>
+          <span class="level-milestone-text">Milestone: a 4-bar loop plays in Session View</span>
+        </div>
+        <div class="level-body">
+          <ul>
+            <li><span class="li-dot" style="background:#34d399;"></span>Session View vs Arrangement View — what they are and when to use each</li>
+            <li><span class="li-dot" style="background:#34d399;"></span>Browser: loading instruments, samples, and effects</li>
+            <li><span class="li-dot" style="background:#34d399;"></span>Drum Rack: load a kit, trigger pads, draw notes in the MIDI editor</li>
+            <li><span class="li-dot" style="background:#34d399;"></span>Launching clips and scenes in Session View</li>
+            <li><span class="li-dot" style="background:#34d399;"></span>Setting BPM and exporting a WAV</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="level-card">
+        <div class="level-header" onclick="toggleAccordion(this)">
+          <span class="chevron">▶</span>
+          <span class="level-num" style="background:#38bdf815;color:#38bdf8;border:1px solid #38bdf830;">LVL 2</span>
+          <span class="level-title-text">Core ingredients — melody, bass, rhythm</span>
+          <span class="level-milestone-text">Milestone: a 1-min loop with 3 elements</span>
+        </div>
+        <div class="level-body">
+          <ul>
+            <li><span class="li-dot" style="background:#38bdf8;"></span>MIDI Note Editor (Piano Roll): drawing, editing, velocity, note length</li>
+            <li><span class="li-dot" style="background:#38bdf8;"></span>Scale awareness in Live 12 — lock to key, never hit a wrong note</li>
+            <li><span class="li-dot" style="background:#38bdf8;"></span>Wavetable or Analog synth: one patch from scratch</li>
+            <li><span class="li-dot" style="background:#38bdf8;"></span>Bass sidechaining to kick using Ableton's stock Compressor</li>
+            <li><span class="li-dot" style="background:#38bdf8;"></span>Clip envelopes for per-clip automation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="level-card">
+        <div class="level-header" onclick="toggleAccordion(this)">
+          <span class="chevron">▶</span>
+          <span class="level-num" style="background:#fbbf2415;color:#fbbf24;border:1px solid #fbbf2430;">LVL 3</span>
+          <span class="level-title-text">Structure — Session to Arrangement</span>
+          <span class="level-milestone-text">Milestone: 2–3 min track with intro, drop, outro</span>
+        </div>
+        <div class="level-body">
+          <ul>
+            <li><span class="li-dot" style="background:#fbbf24;"></span>Recording Session View performance into Arrangement View</li>
+            <li><span class="li-dot" style="background:#fbbf24;"></span>Arrangement View editing: cut, paste, loop, duplicate sections</li>
+            <li><span class="li-dot" style="background:#fbbf24;"></span>Automation lanes: filter sweeps, volume rides, effect wet/dry</li>
+            <li><span class="li-dot" style="background:#fbbf24;"></span>Transitions: risers, reverse reverb, cymbal builds</li>
+            <li><span class="li-dot" style="background:#fbbf24;"></span>Scenes as song sections: naming, ordering, launching in sequence</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="level-card">
+        <div class="level-header" onclick="toggleAccordion(this)">
+          <span class="chevron">▶</span>
+          <span class="level-num" style="background:#f472b615;color:#f472b6;border:1px solid #f472b630;">LVL 4</span>
+          <span class="level-title-text">Mixing — your track sounds clean</span>
+          <span class="level-milestone-text">Milestone: plays well on phone speakers and headphones</span>
+        </div>
+        <div class="level-body">
+          <ul>
+            <li><span class="li-dot" style="background:#f472b6;"></span>Ableton Mixer: return tracks, send levels, gain staging</li>
+            <li><span class="li-dot" style="background:#f472b6;"></span>EQ Eight: high-pass filtering, cutting mud, surgical notches</li>
+            <li><span class="li-dot" style="background:#f472b6;"></span>Compressor: punchy drums (4:1 ratio, 10ms attack, 60ms release)</li>
+            <li><span class="li-dot" style="background:#f472b6;"></span>Hybrid Reverb + Echo: space and depth without washing out</li>
+            <li><span class="li-dot" style="background:#f472b6;"></span>Utility device: stereo width, mono bass below 80Hz</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="level-card">
+        <div class="level-header" onclick="toggleAccordion(this)">
+          <span class="chevron">▶</span>
+          <span class="level-num" style="background:#a78bfa15;color:#a78bfa;border:1px solid #a78bfa30;">LVL 5</span>
+          <span class="level-title-text">Genre mastery — signature sounds per genre</span>
+          <span class="level-milestone-text">Milestone: one distinct track in each target genre</span>
+        </div>
+        <div class="level-body">
+          <ul>
+            <li><span class="li-dot" style="background:#a78bfa;"></span>Trap: Drum Rack 808, hi-hat rolls with velocity humanization, pitch automation</li>
+            <li><span class="li-dot" style="background:#a78bfa;"></span>LoFi: vinyl crackle, Saturator for tape warmth, jazz chord voicings</li>
+            <li><span class="li-dot" style="background:#a78bfa;"></span>EDM: Wavetable supersaw, pumping sidechain, big Hybrid Reverb drop</li>
+            <li><span class="li-dot" style="background:#a78bfa;"></span>Trance: MIDI arpeggiator, 138 BPM, long automation buildups</li>
+            <li><span class="li-dot" style="background:#a78bfa;"></span>Ambient: Follow Actions for generative clip launching, drone pads, granular textures</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /panel-ladder -->
+
+    <!-- ── SESSIONS ───────────────────────────────────────── -->
+    <div id="panel-sessions" class="panel">
+
+      <!-- SESSION 1 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s01" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 01</span>
+          <span class="session-title-text">DAW orientation — Session View + first loop</span>
+          <span class="session-lvl" style="background:#34d39915;color:#34d399;border:1px solid #34d39930;">LVL 1</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=2kg0wzKC1jI">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/2kg0wzKC1jI/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Ableton Live 12 — Beginner Overview</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=dfFiyfqMG9Q">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/dfFiyfqMG9Q/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Ableton Live 12 Interface Walkthrough</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (45 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Session View: rows are clips, columns are tracks, scenes are rows across all tracks.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Arrangement View: timeline like every other DAW. Tab key toggles between the two.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Load a Drum Rack from the browser. Explore the pad grid. Click pads to hear sounds.</div>
+            <div class="phase-label">Phase 2 — Do (60 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Set BPM to 140. Draw a 4-bar drum pattern in the MIDI Note Editor.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Create 3 clips in the same column. Launch them individually. Launch a scene.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Export as WAV (File → Export Audio/Video). Done. First file in the bag.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Can you explain the difference between Session View and Arrangement View in one sentence? If you can't, watch the first video again tomorrow before Session 2. This distinction is the entire foundation of Ableton.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 2 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s02" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 02</span>
+          <span class="session-title-text">Melody + Scale Awareness + Piano Roll</span>
+          <span class="session-lvl" style="background:#38bdf815;color:#38bdf8;border:1px solid #38bdf830;">LVL 2</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=9P4QNBuwtBY">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/9P4QNBuwtBY/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Ableton Piano Roll — Complete Beginner Tutorial</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=Zz9ELf3MQKY">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/Zz9ELf3MQKY/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Ableton Live 12 Scale Mode Tutorial</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (40 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Live 12's Scale Mode: enable it in the MIDI clip, choose C Minor. Only in-key notes are highlighted.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Piano Roll: draw mode (pencil), select mode (arrow), velocity lane at the bottom.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Load Wavetable or a stock piano preset. Draw 8 notes — stay in the highlighted rows.</div>
+            <div class="phase-label">Phase 2 — Do (65 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Write a simple 8-bar melody clip in Session View. Vary lengths — some short, some long.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Write a second clip with a variation of the same melody. Now you have two scenes.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add it to your drum track from Session 1. Launch both. Listen to how they sit together.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Hum your melody back. If you can't hum it, it's too complex. Simplify to 4–5 notes maximum. The best LoFi melodies are often just 3 notes rearranged.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 3 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s03" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 03</span>
+          <span class="session-title-text">Bass + Sidechain compression</span>
+          <span class="session-lvl" style="background:#38bdf815;color:#38bdf8;border:1px solid #38bdf830;">LVL 2</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=DEjMNGFBs0c">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/DEjMNGFBs0c/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Ableton Sidechain Compression Tutorial</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=A0-6BkpHBgU">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/A0-6BkpHBgU/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Bass Design in Ableton Live — Beginners</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (40 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Bass note = root of your scale. C minor = bass plays C, Eb, F, G, Bb. Nothing else.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Sidechain in Ableton: put Compressor on bass track → enable Sidechain → set source to kick track.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Pumping EDM sidechain: fast attack (0.1ms), medium release (200ms), ratio 10:1 or higher.</div>
+            <div class="phase-label">Phase 2 — Do (65 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Add a new MIDI track. Load Wavetable. Design a simple bass patch (sine/saw, low filter cutoff).</div>
+            <div class="task-item"><span class="task-arrow">→</span>Draw a bass line that follows the kick rhythm closely.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Set up the sidechain. Toggle it on and off. Hear the difference. Adjust until it pumps cleanly.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Turn everything off except kick and bass. Do they fight each other or work together? The kick should cut through the bass like a punch, not sit on top of mud. If they fight, your sidechain ratio needs to go higher.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 4 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s04" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 04</span>
+          <span class="session-title-text">First full LoFi track — Session → Arrangement</span>
+          <span class="session-lvl" style="background:#fbbf2415;color:#fbbf24;border:1px solid #fbbf2430;">LVL 3</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=X9F7GBVd85I">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/X9F7GBVd85I/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Make LoFi Hip Hop in Ableton Live</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=lrwKZMrNSNY">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/lrwKZMrNSNY/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Session View to Arrangement View — Ableton</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (30 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Recording Session View into Arrangement: hit the Arrangement Record button, launch scenes, stop. Done.</div>
+            <div class="task-item"><span class="task-arrow">→</span>LoFi essentials: Saturator (tape saturation preset), a vinyl crackle audio clip looped on a track.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Auto Filter on your drums: set to low-pass, automate the cutoff for a lo-fi feel.</div>
+            <div class="phase-label">Phase 2 — Do (75 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Take Sessions 1–3 clips. Arrange scenes: Intro (8 bars) → Main (16) → Bridge (8) → Main (16) → Outro.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Record the performance into Arrangement View. Add a vinyl crackle loop across the full track.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Export. This is your first real finished track.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Play the full track from start to finish without touching anything. Does it hold your attention? Where did you zone out? That section needs something different — add a new element, remove one, or automate a filter.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 5 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s05" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 05</span>
+          <span class="session-title-text">Mixing — EQ Eight + Compression</span>
+          <span class="session-lvl" style="background:#f472b615;color:#f472b6;border:1px solid #f472b630;">LVL 4</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=hiZgNDSTRmo">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/hiZgNDSTRmo/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">EQ Eight Explained — Ableton Live</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=3E2DJT4AFBQ">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/3E2DJT4AFBQ/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Ableton Compressor Tutorial — Beginners</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (45 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>EQ Eight: drag it onto a track. High-pass (filter 1) everything except kick/bass at 60–80Hz.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Notch out the mud: boost 200–400Hz to find it, then cut to remove it.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Compressor on drum bus: 4:1 ratio, 10ms attack, 60ms release. Watch the gain reduction meter — aim for 3–6dB of GR.</div>
+            <div class="phase-label">Phase 2 — Do (60 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Open your LoFi track. Add EQ Eight to every track. High-pass first on all non-bass elements.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Group your drums (Cmd+G). Put a Compressor on the drum group. Compare bypass vs on.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Use the Utility device on the master: set low frequencies to mono below 80Hz.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Solo each track one at a time. Does anything sound harsh or boxy on its own? Find the offensive frequency by boosting EQ Eight and sweeping until it hurts, then cut that frequency. This is how pros EQ.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 6 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s06" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 06</span>
+          <span class="session-title-text">Reverb, delay + return tracks</span>
+          <span class="session-lvl" style="background:#f472b615;color:#f472b6;border:1px solid #f472b630;">LVL 4</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=EIm6ByfzHiA">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/EIm6ByfzHiA/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Ableton Reverb and Delay — Return Tracks Guide</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=UKCxV_7w5gY">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/UKCxV_7w5gY/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Ableton Hybrid Reverb Deep Dive</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (40 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Return tracks (A, B) are shared FX buses. Send any track to them using the Send knob.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Put Hybrid Reverb on Return A. Put Echo on Return B (sync tempo, 1/4 note delay).</div>
+            <div class="task-item"><span class="task-arrow">→</span>Rule: reverb on the master is lazy. Send individual tracks to a reverb return instead — more control.</div>
+            <div class="phase-label">Phase 2 — Do (65 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Set up 2 return tracks: one with Hybrid Reverb (1.5s decay), one with Echo (1/4 note, 25% feedback).</div>
+            <div class="task-item"><span class="task-arrow">→</span>Send the melody to the reverb return at 30%. Send a hi-hat to the echo return at 15%.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Build an ambient pad: any synth + Send A at 100% (reverb only output). That IS ambient music.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Turn down all reverb sends to zero. Play the track dry. Does it still feel musical? It should. Reverb is seasoning, not the meal. If the dry track falls apart, the arrangement itself is the problem — not the reverb.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 7 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s07" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 07</span>
+          <span class="session-title-text">Trap track — Drum Rack 808, hi-hat rolls, automation</span>
+          <span class="session-lvl" style="background:#a78bfa15;color:#a78bfa;border:1px solid #a78bfa30;">LVL 5</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=X3LCRdDk7cA">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/X3LCRdDk7cA/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Trap Beat in Ableton Live — From Scratch</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=L0SKmEKkgv4">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/L0SKmEKkgv4/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">808 Bass Design in Ableton — Wavetable</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (35 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Trap tempo: 140 BPM. 808 = a separate MIDI track with Wavetable (sine wave, long release, pitch envelope).</div>
+            <div class="task-item"><span class="task-arrow">→</span>Hi-hat rolls in the Piano Roll: 1/32 notes with randomized velocity (right-click → Randomize Velocity).</div>
+            <div class="task-item"><span class="task-arrow">→</span>Pitch automation: draw an automation lane on the 808 track, bend the pitch down at the end of each bar.</div>
+            <div class="phase-label">Phase 2 — Do (70 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>New project. Drum Rack with kick on beat 1, snare on beat 3, rolling hi-hats across the bar.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Separate Wavetable track for the 808. Make it slide and growl with pitch automation.</div>
+            <div class="task-item"><span class="task-arrow">→</span>One dark melody clip. Record to Arrangement. Arrange to 2 min. Export.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Does the 808 feel like it's in the same key as the melody? If not, select the 808 MIDI clip, check the root note, and transpose it to match. A detuned 808 is the #1 mistake beginner trap producers make.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 8 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s08" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 08</span>
+          <span class="session-title-text">EDM track — Wavetable supersaw, drops, automation</span>
+          <span class="session-lvl" style="background:#a78bfa15;color:#a78bfa;border:1px solid #a78bfa30;">LVL 5</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=fIGjSZD7HtU">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/fIGjSZD7HtU/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Make an EDM Track in Ableton — Beginners</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=k1SCaRKOFDU">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/k1SCaRKOFDU/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Wavetable Supersaw Sound Design — Ableton</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (40 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>EDM: 128 BPM. Supersaw = Wavetable with Unison set to 8 voices, detune at ~15 cents, stereo spread wide.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Auto Filter on the lead: automate the cutoff from 200Hz closed to full open over 8 bars — that IS the buildup.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Drop anatomy: Auto Filter closes → build for 8 bars → one beat of silence → Auto Filter snaps fully open → drop.</div>
+            <div class="phase-label">Phase 2 — Do (65 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>128 BPM. 4/4 kick on every beat. Off-beat open hi-hat. Clap on 2 and 4.</div>
+            <div class="task-item"><span class="task-arrow">→</span>4-chord progression + supersaw lead on top with Auto Filter cutoff automation.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Arrange: 8-bar buildup → 16-bar drop → 8-bar breakdown → 16-bar drop again. Export.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Find a reference EDM track in the same style. Play yours back to back with it at matched volume. Where does yours feel thin compared to the reference? That gap is your next thing to fix — usually the low end or the reverb size on the lead.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 9 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s09" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 09</span>
+          <span class="session-title-text">Trance + Ambient — texture, atmosphere, Follow Actions</span>
+          <span class="session-lvl" style="background:#a78bfa15;color:#a78bfa;border:1px solid #a78bfa30;">LVL 5</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=L89MSOJQMQY">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/L89MSOJQMQY/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Trance Production in Ableton Live</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=yzDj6OJHTOQ">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/yzDj6OJHTOQ/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Ambient Music with Ableton Follow Actions</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Learn (40 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Trance: 138 BPM. MIDI Arpeggiator effect (device browser → MIDI Effects → Arpeggiator). Set to 1/16 up, 2 octaves.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Ambient: Follow Actions in Session View — set clip to play for 4 bars then jump to another clip randomly. This creates generative music.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Pad design: long attack (3s), long release (4s), maximum reverb send, slow LFO on filter cutoff.</div>
+            <div class="phase-label">Phase 2 — Do (65 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Part A (45 min): 138 BPM, arpeggio lead, kick+bass, long reverb tail, 2-min arrangement.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Part B (20 min): New project. 3 pad clips in Session View with Follow Actions set to random. Press play and listen.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Export both. You now have 5 genre sketches total.</div>
+            <div class="review-box">
+              <div class="review-box-label">15-Min Review</div>
+              <p>Press play on the ambient project and close your eyes for 60 seconds. Does it feel like a space? If it feels static or boring, your Follow Actions need more variation — add a third pad clip with a different chord voicing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSION 10 -->
+      <div class="session-card">
+        <div class="session-header" onclick="toggleAccordion(this)">
+          <input type="checkbox" class="session-check" data-session="s10" title="Mark session complete">
+          <span class="chevron">▶</span>
+          <span class="session-num-badge">Session 10</span>
+          <span class="session-title-text">Polish + portfolio — your best track, finished</span>
+          <span class="session-lvl" style="background:#a78bfa15;color:#a78bfa;border:1px solid #a78bfa30;">LVL 5</span>
+        </div>
+        <div class="session-body">
+          <div class="session-content">
+            <div class="video-section">
+              <div class="video-label">Watch first — click to play in page</div>
+              <div class="video-list">
+                <a class="video-item" href="https://www.youtube.com/watch?v=rRDa71xovzI">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/rRDa71xovzI/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Mastering in Ableton Live — Limiter &amp; Loudness</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+                <a class="video-item" href="https://www.youtube.com/watch?v=hJJMpuPpHuA">
+                  <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/hJJMpuPpHuA/mqdefault.jpg" alt="thumbnail">
+                    <div class="video-thumb-play"><div class="play-circle">▶</div></div>
+                  </div>
+                  <div class="video-item-info">
+                    <div class="video-item-title">Ableton Mixing &amp; Mastering Workflow</div>
+                    <div class="video-item-sub">Watch in page</div>
+                  </div>
+                  <span class="video-item-arrow">▶</span>
+                </a>
+              </div>
+            </div>
+            <div class="phase-label">Phase 1 — Choose + Fix (60 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Listen to all tracks from Sessions 4, 7, 8, 9 back to back. Pick the strongest one.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Open it. List the top 3 things that bother you. Fix only those 3. Resist fixing everything.</div>
+            <div class="task-item"><span class="task-arrow">→</span>Check: gain staging (nothing clipping before the master), reverb balance, automation that builds tension.</div>
+            <div class="phase-label">Phase 2 — Master + Publish (55 min)</div>
+            <div class="task-item"><span class="task-arrow">→</span>Put Glue Compressor on master (gentle — 2:1, slow attack, threshold to 2–3dB of GR).</div>
+            <div class="task-item"><span class="task-arrow">→</span>Put Limiter last on master. Set ceiling to -1dB. Adjust input gain until the meter shows activity.</div>
+            <div class="task-item"><span class="task-arrow">→</span>A/B vs a reference track. Export WAV. Upload to SoundCloud or share for feedback.</div>
+            <div class="review-box" style="border-left-color:var(--accent);">
+              <div class="review-box-label" style="color:var(--accent);">Final Retrospective — 15 Min</div>
+              <p>Compare your Session 1 loop to your Session 10 track. List 5 things you can now do that you couldn't before. That list is your proof of progress. Set your 3 goals for the next 20 hours — and decide: FL Studio or Ableton for your main workflow?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /panel-sessions -->
+
+    <footer>
+      <span>Ableton Live 12 · 20-Hour Plan</span>
+      <span>10 sessions · 5 levels · 5 genres · <a href="../index.html">← BrainWave</a></span>
+    </footer>
+
+  </div><!-- /wrapper -->
+
+  <script src="../assets/js/progress.js"></script>
+  <script src="../assets/js/player.js"></script>
+  <script>
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+      document.getElementById('panel-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function toggleAccordion(header) {
+      var body    = header.nextElementSibling;
+      var chevron = header.querySelector('.chevron');
+      var isOpen  = body.classList.toggle('open');
+      chevron.classList.toggle('open', isOpen);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      bwInitProgress('ableton-live-12');
+    });
+  </script>
+
+</body>
+</html>

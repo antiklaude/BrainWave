@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/* ── DARK THEME (default) ─────────────────────────────────── */
+:root {
+  --bg:              #0b0c0e;
+  --bg2:             #111318;
+  --bg3:             #181c22;
+  --border:          rgba(255,255,255,0.07);
+  --border-strong:   rgba(255,255,255,0.13);
+  --text:            #e8eaf0;
+  --text-muted:      #7a7f8e;
+  --text-dim:        #4a4f5c;
+  --text-white:      #ffffff;
+  --modal-bg:        rgba(0,0,0,0.88);
+  --shadow:          0 8px 32px rgba(0,0,0,0.4);
+  --noise-opacity:   0.4;
+
+  --accent:          #a78bfa;
+  --accent2:         #6ee7b7;
+  --accent3:         #fbbf24;
+  --accent4:         #f472b6;
+  --red:             #f87171;
+
+  --mono:   'Space Mono', monospace;
+  --sans:   'DM Sans', sans-serif;
+  --radius:    12px;
+  --radius-sm:  8px;
+}
+
+/* ── LIGHT THEME ──────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg:            #f4f5f8;
+  --bg2:           #ffffff;
+  --bg3:           #eaebf0;
+  --border:        rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.16);
+  --text:          #1a1d26;
+  --text-muted:    #565b6e;
+  --text-dim:      #9aa0b2;
+  --text-white:    #0d0f14;
+  --modal-bg:      rgba(0,0,0,0.72);
+  --shadow:        0 8px 32px rgba(0,0,0,0.12);
+  --noise-opacity: 0.08;
+}
+
+/* ── RESET ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans), system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background 0.25s, color 0.25s;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── SCROLLBAR ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+/* ── PROSE (session markdown body) ───────────────────────── */
+.bw-prose h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 1.5rem 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+.bw-prose ul { list-style: none; padding: 0; margin: 0.5rem 0; }
+.bw-prose ul li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.bw-prose ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.75rem;
+  top: 0.1rem;
+}
+.bw-prose blockquote {
+  border-left: 3px solid var(--accent);
+  background: var(--bg3);
+  padding: 0.75rem 1rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 1rem 0;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+.bw-prose p { margin: 0.5rem 0; color: var(--text-muted); font-size: 0.9rem; }
+.bw-prose strong { color: var(--text); }
+.bw-prose code {
+  background: var(--bg3);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: var(--mono), monospace;
+  font-size: 0.85em;
+}
