@@ -1,34 +1,44 @@
-import { Link } from 'react-router-dom'
-import { CheckCircle2, Circle } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { CheckCircle2, Circle, ChevronLeft } from 'lucide-react'
 import ProgressBar from '../ui/ProgressBar'
+import ThemeToggle from '../ui/ThemeToggle'
 
 export default function CourseSidebar({ course, sessions, completed, onSessionClick }) {
   const pct = sessions.length > 0 ? Math.round((completed.size / sessions.length) * 100) : 0
+  const navigate = useNavigate()
 
   return (
     <aside
       style={{
         width: 260,
         flexShrink: 0,
-        position: 'sticky',
-        top: 56,
-        height: 'calc(100vh - 56px)',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        height: '100vh',
         overflowY: 'auto',
         padding: '0 0 24px',
         borderRight: '1px solid var(--border)',
+        background: 'var(--bg)',
         display: 'none',
+        flexDirection: 'column',
+        zIndex: 50,
       }}
       className="bw-sidebar"
     >
       <style>{`
-        @media (min-width: 1024px) { .bw-sidebar { display: block !important; } }
+        @media (min-width: 1024px) { .bw-sidebar { display: flex !important; } }
       `}</style>
 
-      {/* Branding */}
+      {/* Header: branding + back + theme */}
       <div style={{
-        padding: '14px 20px',
+        padding: '0 16px',
+        height: 56,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         borderBottom: '1px solid var(--border)',
-        marginBottom: 20,
+        flexShrink: 0,
       }}>
         <Link
           to="/"
@@ -52,9 +62,32 @@ export default function CourseSidebar({ course, sessions, completed, onSessionCl
           }} />
           BrainWave
         </Link>
+        <ThemeToggle />
       </div>
 
-      <div style={{ padding: '0 20px', marginBottom: 20 }}>
+      {/* Back link */}
+      <div style={{ padding: '12px 16px 0', flexShrink: 0 }}>
+        <button
+          onClick={() => navigate('/')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 4,
+            background: 'none',
+            border: 'none',
+            color: 'var(--text-muted)',
+            cursor: 'pointer',
+            fontSize: 13,
+            padding: '4px 0',
+            fontFamily: 'var(--sans)',
+          }}
+        >
+          <ChevronLeft size={15} />
+          All Courses
+        </button>
+      </div>
+
+      <div style={{ padding: '16px 20px 0', marginBottom: 20 }}>
         <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 8 }}>
           {completed.size}/{sessions.length} sessions complete
         </div>

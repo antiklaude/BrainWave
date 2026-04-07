@@ -8,14 +8,16 @@ export default function TopNav({ title, showBack, onSearch }) {
   const isHome = location.pathname === '/'
 
   return (
-    <nav style={{
-      position: 'sticky',
-      top: 0,
-      zIndex: 100,
-      background: 'var(--bg)',
-      borderBottom: '1px solid var(--border)',
-      backdropFilter: 'blur(8px)',
-    }}>
+    <nav
+      className={showBack ? 'bw-course-topnav' : ''}
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
+        background: 'var(--bg)',
+        borderBottom: '1px solid var(--border)',
+        backdropFilter: 'blur(8px)',
+      }}>
       <div style={{
         maxWidth: 1200,
         margin: '0 auto',

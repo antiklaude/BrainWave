@@ -51,6 +51,12 @@ export default function CoursePage() {
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
+      <style>{`
+        @media (min-width: 1024px) {
+          .bw-course-main { margin-left: 260px; }
+          .bw-course-topnav { display: none !important; }
+        }
+      `}</style>
       {/* Sidebar — desktop only */}
       <CourseSidebar
         course={course}
@@ -60,7 +66,7 @@ export default function CoursePage() {
       />
 
       {/* Main content */}
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div className="bw-course-main" style={{ flex: 1, minWidth: 0 }}>
         {/* Course header */}
         <div style={{
           padding: '40px 32px 32px',
