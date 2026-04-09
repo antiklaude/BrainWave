@@ -2,21 +2,25 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Create full course content (session `.md` files + ladder theory guides) for 7 coming-soon courses on BrainWave, with real curated YouTube videos, enriched theory in Phase 1, and quick-check quizzes per session.
+**Goal:** Create full course content (session `.md` files + ladder theory in catalog.js) for 7 coming-soon courses on BrainWave, with real curated YouTube videos, enriched theory in Phase 1, and quick-check quizzes per session.
 
-**Architecture:** Each course is independent. For each course: (1) research agent finds best YouTube videos per session topic, (2) content is written as `.md` files following CONTENT-GUIDE.md format, (3) ladder guide written as a standalone theory doc, (4) peer review agent validates quality, (5) commit. Repeat per course.
+**Architecture:** Each course is independent. For each course: (1) research agent finds best YouTube videos per session topic, (2) content is written as `.md` files following CONTENT-GUIDE.md format, (3) ladder theory written into `catalog.js` as a `ladder` array per course entry, (4) peer review agent validates quality, (5) commit. Repeat per course.
 
 **Tech Stack:** Markdown files, YAML frontmatter, YouTube video IDs, BrainWave CONTENT-GUIDE.md format
 
 **Spec:** `docs/superpowers/specs/2026-04-06-new-courses-content-design.md`
 **Content Guide:** `docs/CONTENT-GUIDE.md`
 
+> ⚠️ **PATH CORRECTION (2026-04-07):** The React app lives under `app/`. All session files go into `app/src/data/courses/` NOT `src/data/courses/`. The catalog lives at `app/src/data/catalog.js`. CoursePage.jsx at `app/src/pages/CoursePage.jsx` reads from these locations via `import.meta.glob`.
+
+> ⚠️ **LADDER CORRECTION (2026-04-07):** There are no separate ladder guide `.md` files. The Learning Ladder tab in `CoursePage.jsx` renders from session metadata + catalog data. Ladder theory content goes into a `ladder` array on each course entry in `app/src/data/catalog.js`. CoursePage.jsx must also be updated to render the `ladder` prose when present (currently renders thin auto-generated version).
+
 ---
 
-## File Map
+## File Map (CORRECTED)
 
 ```
-src/data/courses/
+app/src/data/courses/
   python-programming/sessions/
     01.md  02.md  03.md  04.md  05.md  06.md  07.md
     08.md  09.md  10.md  11.md  12.md  13.md  14.md  15.md
@@ -44,15 +48,45 @@ src/data/courses/
     01.md  02.md  03.md  04.md  05.md
     06.md  07.md  08.md  09.md  10.md
 
-docs/ladder-guides/
-  python-programming.md
-  web-dev.md
-  azure-devops.md
-  graphic-design.md
-  3d-modelling.md
-  3d-printing.md
-  ui-ux-design.md
+app/src/data/catalog.js   ← add `ladder` array to each new course entry
+app/src/pages/CoursePage.jsx  ← update Learning Ladder tab to render ladder prose
 ```
+
+---
+
+## Ladder Data Format (add to each course in catalog.js)
+
+```js
+ladder: [
+  {
+    level: 1,
+    title: 'Foundations',
+    milestone: 'Write and run a working Python script',
+    about: 'Two to three paragraphs of plain-English explanation of what this level covers and why the order makes sense.',
+    concepts: [
+      { name: 'Variables', desc: 'Named containers that store values so your program can remember things.' },
+      { name: 'Data Types', desc: 'Python needs to know what kind of data it is working with — number, text, true/false — to handle it correctly.' },
+    ],
+    keyInsight: 'One memorable rule of thumb the learner will carry into the next level.',
+    outcomes: [
+      'Create and use variables of every basic type',
+      'Write a script that takes input and produces output',
+    ],
+  },
+  // ... levels 2–5
+]
+```
+
+---
+
+## CoursePage.jsx Ladder Update (apply before or alongside first course)
+
+In `app/src/pages/CoursePage.jsx`, replace the `activeTab === 'Learning Ladder'` block with one that:
+1. Checks if `course.ladder` exists
+2. If yes: renders full prose (about paragraphs, concepts, keyInsight, outcomes) per level
+3. If no: falls back to the existing thin auto-generated version
+
+This is a pure rendering change — no new files, no new parsers.
 
 ---
 
@@ -175,8 +209,8 @@ Return: APPROVED or LIST OF SPECIFIC CHANGES NEEDED (file + line-level feedback)
 ## Task 1 — Python Programming (15 sessions)
 
 **Spec reference:** Course 1 in `docs/superpowers/specs/2026-04-06-new-courses-content-design.md`
-**Output dir:** `src/data/courses/python-programming/sessions/`
-**Ladder guide:** `docs/ladder-guides/python-programming.md`
+**Output dir:** `app/src/data/courses/python-programming/sessions/`
+**Ladder data:** add `ladder` array to `python-programming` entry in `app/src/data/catalog.js`
 
 ### Session specs
 
@@ -200,8 +234,7 @@ Return: APPROVED or LIST OF SPECIFIC CHANGES NEEDED (file + line-level feedback)
 
 - [ ] **Step 1: Create output directory**
 ```bash
-mkdir -p /Users/karthickragavr/src/BrainWave/src/data/courses/python-programming/sessions
-mkdir -p /Users/karthickragavr/src/BrainWave/docs/ladder-guides
+mkdir -p /Users/karthickragavr/src/BrainWave/app/src/data/courses/python-programming/sessions
 ```
 
 - [ ] **Step 2: Research YouTube videos**
@@ -336,9 +369,9 @@ Write `15.md` (Final Project — CLI Tool):
 - Scaffold the structure in Phase 1, learner picks and builds in Phase 2
 - Review: run `python tool.py --help`. Does it explain itself? That's your quality bar.
 
-- [ ] **Step 8: Write Python ladder guide**
+- [ ] **Step 8: Write Python ladder data into catalog.js**
 
-Write `docs/ladder-guides/python-programming.md` with 5 level sections following the ladder guide format.
+Add a `ladder` array to the `python-programming` entry in `app/src/data/catalog.js` using the Ladder Data Format defined above.
 
 LVL 1 prose must explain: Python runs top-to-bottom like a recipe, variables are labelled boxes, why types exist
 LVL 2 prose must explain: why functions are the biggest productivity unlock in programming, how lists and dicts are the two data structures you'll use 90% of the time
@@ -352,16 +385,16 @@ Dispatch a peer review agent using the exact prompt from the "Peer Review Prompt
 
 - [ ] **Step 10: Commit Python course**
 ```bash
-git add src/data/courses/python-programming/ docs/ladder-guides/python-programming.md
-git commit -m "content: add Python Programming course — 15 sessions + ladder guide"
+git add app/src/data/courses/python-programming/ app/src/data/catalog.js
+git commit -m "content: add Python Programming course — 15 sessions + ladder data"
 ```
 
 ---
 
 ## Task 2 — Web Development (12 sessions)
 
-**Output dir:** `src/data/courses/web-dev/sessions/`
-**Ladder guide:** `docs/ladder-guides/web-dev.md`
+**Output dir:** `app/src/data/courses/web-dev/sessions/`
+**Ladder data:** add `ladder` array to `web-dev` entry in `app/src/data/catalog.js`
 
 ### Session specs
 
@@ -382,7 +415,7 @@ git commit -m "content: add Python Programming course — 15 sessions + ladder g
 
 - [ ] **Step 1: Create output directory**
 ```bash
-mkdir -p /Users/karthickragavr/src/BrainWave/src/data/courses/web-dev/sessions
+mkdir -p /Users/karthickragavr/src/BrainWave/app/src/data/courses/web-dev/sessions
 ```
 
 - [ ] **Step 2: Research YouTube videos**
@@ -478,9 +511,9 @@ Write `12.md` (Project — Portfolio):
 - Cover: GitHub Pages setup — Settings → Pages → Deploy from branch → main → /root
 - Review: share the URL with one person. Does it load on their device?
 
-- [ ] **Step 7: Write Web Dev ladder guide**
+- [ ] **Step 7: Write Web Dev ladder data into catalog.js**
 
-Write `docs/ladder-guides/web-dev.md`:
+Add `ladder` array to `web-dev` entry in `app/src/data/catalog.js`:
 - LVL 1 prose: HTML is structure, CSS is style — they do completely different jobs and need to stay separate
 - LVL 2 prose: layout is the hardest part of CSS because browsers had no good tools for it until Flexbox (2009) and Grid (2017); this is why old CSS feels like fighting
 - LVL 3 prose: JavaScript is a full programming language that happens to run in the browser — it's not a styling language, it's a logic language
@@ -492,16 +525,16 @@ Dispatch peer review agent with the exact prompt from this plan. Apply requested
 
 - [ ] **Step 9: Commit Web Dev course**
 ```bash
-git add src/data/courses/web-dev/ docs/ladder-guides/web-dev.md
-git commit -m "content: add Web Development course — 12 sessions + ladder guide"
+git add app/src/data/courses/web-dev/ app/src/data/catalog.js
+git commit -m "content: add Web Development course — 12 sessions + ladder data"
 ```
 
 ---
 
 ## Task 3 — Azure DevOps (12 sessions)
 
-**Output dir:** `src/data/courses/azure-devops/sessions/`
-**Ladder guide:** `docs/ladder-guides/azure-devops.md`
+**Output dir:** `app/src/data/courses/azure-devops/sessions/`
+**Ladder data:** add `ladder` array to `azure-devops` entry in `app/src/data/catalog.js`
 
 ### Session specs
 
@@ -522,7 +555,7 @@ git commit -m "content: add Web Development course — 12 sessions + ladder guid
 
 - [ ] **Step 1: Create output directory**
 ```bash
-mkdir -p /Users/karthickragavr/src/BrainWave/src/data/courses/azure-devops/sessions
+mkdir -p /Users/karthickragavr/src/BrainWave/app/src/data/courses/azure-devops/sessions
 ```
 
 - [ ] **Step 2: Research YouTube videos**
@@ -663,9 +696,9 @@ Write `12.md` (Monitoring + Secrets):
 - Cover: Azure Key Vault integration — link a Key Vault to a variable group, use secrets in pipeline without ever seeing the value
 - Key insight: secrets must never appear in pipeline logs — Key Vault + masked variables is the only correct approach
 
-- [ ] **Step 7: Write Azure DevOps ladder guide**
+- [ ] **Step 7: Write Azure DevOps ladder data into catalog.js**
 
-Write `docs/ladder-guides/azure-devops.md`:
+Add `ladder` array to `azure-devops` entry in `app/src/data/catalog.js`:
 - LVL 1 prose: DevOps is not a tool — it's a practice of automating the journey from code to production. Azure DevOps is one platform that supports that journey end to end.
 - LVL 2 prose: CI means every commit gets built and tested automatically. This sounds simple but it fundamentally changes how a team works — bugs get caught in minutes, not weeks.
 - LVL 3 prose: before you can deploy from a pipeline, you need to know where you're deploying to (Azure infra) and how the pipeline proves it's allowed to deploy there (service connections).
@@ -677,16 +710,16 @@ Dispatch peer review agent. Apply changes.
 
 - [ ] **Step 9: Commit Azure DevOps course**
 ```bash
-git add src/data/courses/azure-devops/ docs/ladder-guides/azure-devops.md
-git commit -m "content: add Azure DevOps course — 12 sessions + ladder guide"
+git add app/src/data/courses/azure-devops/ app/src/data/catalog.js
+git commit -m "content: add Azure DevOps course — 12 sessions + ladder data"
 ```
 
 ---
 
 ## Task 4 — Graphic Design (10 sessions)
 
-**Output dir:** `src/data/courses/graphic-design/sessions/`
-**Ladder guide:** `docs/ladder-guides/graphic-design.md`
+**Output dir:** `app/src/data/courses/graphic-design/sessions/`
+**Ladder data:** add `ladder` array to `graphic-design` entry in `app/src/data/catalog.js`
 
 ### Session specs
 
@@ -705,7 +738,7 @@ git commit -m "content: add Azure DevOps course — 12 sessions + ladder guide"
 
 - [ ] **Step 1: Create output directory**
 ```bash
-mkdir -p /Users/karthickragavr/src/BrainWave/src/data/courses/graphic-design/sessions
+mkdir -p /Users/karthickragavr/src/BrainWave/app/src/data/courses/graphic-design/sessions
 ```
 
 - [ ] **Step 2: Research YouTube videos**
@@ -779,9 +812,9 @@ Write `10.md` (Presentation + Portfolio):
 - Cover: portfolio case study format — problem, process, outcome (not just "here's what I made")
 - Phase 2: create a 5-slide presentation using Figma or Google Slides that presents the brand identity from Session 08 as a client deliverable
 
-- [ ] **Step 4: Write Graphic Design ladder guide**
+- [ ] **Step 4: Write Graphic Design ladder data into catalog.js**
 
-Write `docs/ladder-guides/graphic-design.md`:
+Add `ladder` array to `graphic-design` entry in `app/src/data/catalog.js`:
 - LVL 1 prose: design is a language. Color and type are its two most fundamental vocabularies. Good design is not about making things pretty — it's about making things clear.
 - LVL 2 prose: layout is where most non-designers fail. They arrange things randomly. Professionals arrange things according to principles. CARP is the shorthand for those principles.
 - LVL 3 prose: tools are not the skill. A bad designer with Figma makes bad work. But knowing your tools means you can execute ideas quickly.
@@ -793,16 +826,16 @@ Dispatch peer review agent. Apply changes.
 
 - [ ] **Step 6: Commit Graphic Design course**
 ```bash
-git add src/data/courses/graphic-design/ docs/ladder-guides/graphic-design.md
-git commit -m "content: add Graphic Design course — 10 sessions + ladder guide"
+git add app/src/data/courses/graphic-design/ app/src/data/catalog.js
+git commit -m "content: add Graphic Design course — 10 sessions + ladder data"
 ```
 
 ---
 
 ## Task 5 — 3D Modelling in Blender (15 sessions)
 
-**Output dir:** `src/data/courses/3d-modelling/sessions/`
-**Ladder guide:** `docs/ladder-guides/3d-modelling.md`
+**Output dir:** `app/src/data/courses/3d-modelling/sessions/`
+**Ladder data:** add `ladder` array to `3d-modelling` entry in `app/src/data/catalog.js`
 
 ### Session specs
 
@@ -826,7 +859,7 @@ git commit -m "content: add Graphic Design course — 10 sessions + ladder guide
 
 - [ ] **Step 1: Create output directory**
 ```bash
-mkdir -p /Users/karthickragavr/src/BrainWave/src/data/courses/3d-modelling/sessions
+mkdir -p /Users/karthickragavr/src/BrainWave/app/src/data/courses/3d-modelling/sessions
 ```
 
 - [ ] **Step 2: Research YouTube videos**
@@ -882,9 +915,9 @@ Follow the session format. Key notes per session:
 
 `15.md`: Final project — learner designs and builds a 10-second animation from scratch. Phase 1 (30 min): plan it — what's the subject, what's the story, what camera movement. Phase 2 (75 min): model → rig (if needed) → animate → light → render. Review: watch it back. Does it have a beginning, middle, and end — even at 10 seconds?
 
-- [ ] **Step 4: Write Blender ladder guide**
+- [ ] **Step 4: Write Blender ladder data into catalog.js**
 
-Write `docs/ladder-guides/3d-modelling.md`:
+Add `ladder` array to `3d-modelling` entry in `app/src/data/catalog.js`:
 - LVL 1 prose: Blender's interface is unlike any software you've used. Don't try to memorise it — learn the shortcuts for the 10 actions you do constantly, and let the rest reveal itself when you need it.
 - LVL 2 prose: 3D modelling is topological problem-solving — you're controlling how triangles connect on a surface. Hard surface and organic are two fundamentally different workflows, and knowing which to use is half the battle.
 - LVL 3 prose: materials are not colours — they're physical simulations of how light bounces off surfaces. UV maps are the bridge between a 3D mesh and a 2D image — without them, materials are guessing.
@@ -897,16 +930,16 @@ Dispatch peer review agent. Apply changes.
 
 - [ ] **Step 6: Commit Blender course**
 ```bash
-git add src/data/courses/3d-modelling/ docs/ladder-guides/3d-modelling.md
-git commit -m "content: add 3D Modelling (Blender) course — 15 sessions + ladder guide"
+git add app/src/data/courses/3d-modelling/ app/src/data/catalog.js
+git commit -m "content: add 3D Modelling (Blender) course — 15 sessions + ladder data"
 ```
 
 ---
 
 ## Task 6 — 3D Printing (8 sessions)
 
-**Output dir:** `src/data/courses/3d-printing/sessions/`
-**Ladder guide:** `docs/ladder-guides/3d-printing.md`
+**Output dir:** `app/src/data/courses/3d-printing/sessions/`
+**Ladder data:** add `ladder` array to `3d-printing` entry in `app/src/data/catalog.js`
 
 ### Session specs
 
@@ -923,7 +956,7 @@ git commit -m "content: add 3D Modelling (Blender) course — 15 sessions + ladd
 
 - [ ] **Step 1: Create output directory**
 ```bash
-mkdir -p /Users/karthickragavr/src/BrainWave/src/data/courses/3d-printing/sessions
+mkdir -p /Users/karthickragavr/src/BrainWave/app/src/data/courses/3d-printing/sessions
 ```
 
 - [ ] **Step 2: Research YouTube videos**
@@ -984,9 +1017,9 @@ Dispatch research agent. Prefer: Maker's Muse, Thomas Sanladerer, The 3D Print G
 - Cover: post-processing — sanding (80 → 120 → 220 → 400 grit), priming, painting, acetone smoothing (ABS only)
 - Phase 2: diagnose 3 printed failure examples (provide descriptions), identify the cause and the fix
 
-- [ ] **Step 4: Write 3D Printing ladder guide**
+- [ ] **Step 4: Write 3D Printing ladder data into catalog.js**
 
-Write `docs/ladder-guides/3d-printing.md`:
+Add `ladder` array to `3d-printing` entry in `app/src/data/catalog.js`:
 - LVL 1 prose: FDM printing is a process of turning filament into layers. Understanding the machine before you model for it saves hours of failed prints.
 - LVL 2 prose: printing a design you made yourself is a completely different feeling from printing someone else's STL. Design for print from the start — don't model something then wonder why it won't print.
 - LVL 3 prose: most printing problems are settings problems, not hardware problems. Knowing how to read a failed print and fix the slicer settings is the skill that separates people who get good prints consistently from people who blame the machine.
@@ -997,16 +1030,16 @@ Dispatch peer review agent. Apply changes.
 
 - [ ] **Step 6: Commit 3D Printing course**
 ```bash
-git add src/data/courses/3d-printing/ docs/ladder-guides/3d-printing.md
-git commit -m "content: add 3D Printing course — 8 sessions + ladder guide"
+git add app/src/data/courses/3d-printing/ app/src/data/catalog.js
+git commit -m "content: add 3D Printing course — 8 sessions + ladder data"
 ```
 
 ---
 
 ## Task 7 — UI/UX Design (10 sessions)
 
-**Output dir:** `src/data/courses/ui-ux-design/sessions/`
-**Ladder guide:** `docs/ladder-guides/ui-ux-design.md`
+**Output dir:** `app/src/data/courses/ui-ux-design/sessions/`
+**Ladder data:** add `ladder` array to `ui-ux-design` entry in `app/src/data/catalog.js`
 
 ### Session specs
 
@@ -1025,7 +1058,7 @@ git commit -m "content: add 3D Printing course — 8 sessions + ladder guide"
 
 - [ ] **Step 1: Create output directory**
 ```bash
-mkdir -p /Users/karthickragavr/src/BrainWave/src/data/courses/ui-ux-design/sessions
+mkdir -p /Users/karthickragavr/src/BrainWave/app/src/data/courses/ui-ux-design/sessions
 ```
 
 - [ ] **Step 2: Research YouTube videos**
@@ -1103,9 +1136,9 @@ Dispatch research agent. Prefer: AJ&Smart, Mike Locke, Figma official, DesignCou
 - Cover: what NOT to do — don't just show screenshots. Show your thinking. Show the before and after. Show what failed.
 - Phase 2: write a full case study for the app project from Sessions 01–09. Minimum: problem statement, 1 research insight, 1 wireframe, 1 hi-fi screen, 1 usability finding, final prototype link.
 
-- [ ] **Step 4: Write UI/UX ladder guide**
+- [ ] **Step 4: Write UI/UX ladder data into catalog.js**
 
-Write `docs/ladder-guides/ui-ux-design.md`:
+Add `ladder` array to `ui-ux-design` entry in `app/src/data/catalog.js`:
 - LVL 1 prose: most people think UX design means making apps look nice. It doesn't. It means understanding what a specific person needs to do a specific task, then removing every obstacle between them and that task.
 - LVL 2 prose: wireframes feel reductive — why draw grey boxes when you could be designing? Because grey boxes force you to make decisions about structure without being distracted by colour and polish. Fix structure first.
 - LVL 3 prose: Figma is the industry standard tool because it sits at the intersection of design and collaboration. Components and auto layout are not convenience features — they're how professional teams maintain consistency across hundreds of screens.
@@ -1117,8 +1150,8 @@ Dispatch peer review agent. Apply changes.
 
 - [ ] **Step 6: Commit UI/UX course**
 ```bash
-git add src/data/courses/ui-ux-design/ docs/ladder-guides/ui-ux-design.md
-git commit -m "content: add UI/UX Design course — 10 sessions + ladder guide"
+git add app/src/data/courses/ui-ux-design/ app/src/data/catalog.js
+git commit -m "content: add UI/UX Design course — 10 sessions + ladder data"
 ```
 
 ---

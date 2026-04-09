@@ -105,10 +105,10 @@ export default function CoursePage() {
               { icon: Clock, label: `${course.hours} Hours` },
               { icon: BookOpen, label: `${course.sessionCount} Sessions` },
               { icon: BarChart3, label: `${course.levels} Levels` },
-            ].map(({ icon: Icon, label }) => (
-              <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <Icon size={14} style={{ color: 'var(--accent)' }} />
-                <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{label}</span>
+            ].map((item) => (
+              <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <item.icon size={14} style={{ color: 'var(--accent)' }} />
+                <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{item.label}</span>
               </div>
             ))}
           </div>
@@ -204,53 +204,163 @@ export default function CoursePage() {
           )}
 
           {activeTab === 'Learning Ladder' && (
-            <div style={{ maxWidth: 640 }}>
+            <div style={{ maxWidth: 680 }}>
               <p style={{ color: 'var(--text-muted)', marginBottom: 24, fontSize: 14 }}>
                 This course is structured across {course.levels} levels, each building on the last. Complete the sessions in order for best results.
               </p>
-              {Array.from({ length: course.levels }, (_, i) => i + 1).map(level => {
-                const levelColors = ['#6ee7b7', '#38bdf8', '#fbbf24', '#f472b6', '#a78bfa']
-                const color = levelColors[level - 1] || 'var(--accent)'
-                const sessionCount = Math.ceil(sessions.length / course.levels)
-                const levelSessions = sessions.slice((level - 1) * sessionCount, level * sessionCount)
-                return (
-                  <div key={level} style={{
-                    background: 'var(--bg2)',
-                    border: '1px solid var(--border)',
-                    borderRadius: 'var(--radius)',
-                    marginBottom: 12,
-                    overflow: 'hidden',
-                  }}>
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 12,
-                      padding: '14px 20px',
+
+              {course.ladder ? (
+                /* Rich prose ladder — shown when catalog entry has a ladder array */
+                course.ladder.map((lvl) => {
+                  const levelColors = ['#6ee7b7', '#38bdf8', '#fbbf24', '#f472b6', '#a78bfa']
+                  const color = levelColors[(lvl.level - 1) % levelColors.length]
+                  return (
+                    <div key={lvl.level} style={{
+                      background: 'var(--bg2)',
+                      border: '1px solid var(--border)',
+                      borderRadius: 'var(--radius)',
+                      marginBottom: 16,
+                      overflow: 'hidden',
                     }}>
-                      <span style={{
-                        fontSize: 11,
-                        fontFamily: 'var(--mono)',
-                        padding: '3px 10px',
-                        borderRadius: 4,
-                        background: `${color}15`,
-                        color,
-                        border: `1px solid ${color}30`,
-                        flexShrink: 0,
+                      {/* Level header */}
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 12,
+                        padding: '16px 20px',
+                        borderBottom: '1px solid var(--border)',
+                        background: `${color}08`,
                       }}>
-                        LVL {level}
-                      </span>
-                      <div>
-                        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>
-                          {levelSessions.map(s => s.title).join(' · ')}
+                        <span style={{
+                          fontSize: 11,
+                          fontFamily: 'var(--mono)',
+                          padding: '3px 10px',
+                          borderRadius: 4,
+                          background: `${color}15`,
+                          color,
+                          border: `1px solid ${color}30`,
+                          flexShrink: 0,
+                        }}>
+                          LVL {lvl.level}
+                        </span>
+                        <div>
+                          <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>{lvl.title}</div>
+                          {lvl.milestone && (
+                            <div style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 2 }}>
+                              Milestone: {lvl.milestone}
+                            </div>
+                          )}
                         </div>
-                        <div style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 2 }}>
-                          {levelSessions.length} session{levelSessions.length !== 1 ? 's' : ''}
+                      </div>
+
+                      {/* Level body */}
+                      <div style={{ padding: '20px' }}>
+                        {/* About paragraphs */}
+                        {lvl.about && (
+                          <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
+                            {lvl.about}
+                          </p>
+                        )}
+
+                        {/* Core concepts */}
+                        {lvl.concepts && lvl.concepts.length > 0 && (
+                          <div style={{ marginBottom: 16 }}>
+                            <div style={{ fontSize: 11, fontFamily: 'var(--mono)', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>
+                              Core concepts
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                              {lvl.concepts.map((c, i) => (
+                                <div key={i} style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                                  <span style={{ color: 'var(--text)', fontWeight: 600 }}>{c.name}</span>
+                                  {' — '}
+                                  {c.desc}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Key insight */}
+                        {lvl.keyInsight && (
+                          <div style={{
+                            borderLeft: `3px solid ${color}`,
+                            paddingLeft: 14,
+                            marginBottom: 16,
+                            background: `${color}08`,
+                            padding: '10px 14px',
+                            borderRadius: '0 var(--radius-sm) var(--radius-sm) 0',
+                          }}>
+                            <span style={{ fontSize: 11, fontFamily: 'var(--mono)', color, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Key insight </span>
+                            <span style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6 }}>{lvl.keyInsight}</span>
+                          </div>
+                        )}
+
+                        {/* Outcomes */}
+                        {lvl.outcomes && lvl.outcomes.length > 0 && (
+                          <div>
+                            <div style={{ fontSize: 11, fontFamily: 'var(--mono)', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>
+                              After this level you can
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                              {lvl.outcomes.map((o, i) => (
+                                <div key={i} style={{ display: 'flex', gap: 8, fontSize: 13, color: 'var(--text-muted)' }}>
+                                  <span style={{ color, flexShrink: 0 }}>→</span>
+                                  <span>{o}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })
+              ) : (
+                /* Fallback thin ladder — for courses without ladder data yet */
+                Array.from({ length: course.levels }, (_, i) => i + 1).map(level => {
+                  const levelColors = ['#6ee7b7', '#38bdf8', '#fbbf24', '#f472b6', '#a78bfa']
+                  const color = levelColors[level - 1] || 'var(--accent)'
+                  const sessionCount = Math.ceil(sessions.length / course.levels)
+                  const levelSessions = sessions.slice((level - 1) * sessionCount, level * sessionCount)
+                  return (
+                    <div key={level} style={{
+                      background: 'var(--bg2)',
+                      border: '1px solid var(--border)',
+                      borderRadius: 'var(--radius)',
+                      marginBottom: 12,
+                      overflow: 'hidden',
+                    }}>
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 12,
+                        padding: '14px 20px',
+                      }}>
+                        <span style={{
+                          fontSize: 11,
+                          fontFamily: 'var(--mono)',
+                          padding: '3px 10px',
+                          borderRadius: 4,
+                          background: `${color}15`,
+                          color,
+                          border: `1px solid ${color}30`,
+                          flexShrink: 0,
+                        }}>
+                          LVL {level}
+                        </span>
+                        <div>
+                          <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>
+                            {levelSessions.map(s => s.title).join(' · ')}
+                          </div>
+                          <div style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 2 }}>
+                            {levelSessions.length} session{levelSessions.length !== 1 ? 's' : ''}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                )
-              })}
+                  )
+                })
+              )}
             </div>
           )}
 
