@@ -1,0 +1,74 @@
+var e=`---
+title: "Hi-Fi Prototyping + Interactions"
+duration: 110
+level: 3
+levelLabel: "LVL 3"
+levelColor: "#fbbf24"
+videos:
+  - id: "lTIeZ2ahEkQ"
+    title: "Figma Prototyping — Complete Beginner to Advanced — Figma"
+  - id: "4W4LvJnNegA"
+    title: "Figma Smart Animate Tutorial — DesignCourse"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What does Figma's Smart Animate transition do?"
+      options: ["It automatically creates new frames", "It interpolates the position, size, and opacity of matching layers between two frames, creating a smooth animated transition that simulates real component motion", "It adds motion blur to designs", "It converts the prototype to code"]
+      answer: 1
+      explanation: "Smart Animate looks for layers with the same name in both frames and animates between their states — if a button moves from left to right between two frames, Smart Animate makes it slide smoothly. This is much more realistic than an instant cut and helps designers communicate intended animations to developers."
+    - type: multiple-choice
+      question: "What is an Overlay in Figma prototyping?"
+      options: ["A semi-transparent layer on top of content", "A frame that appears on top of the current screen (like a modal, drawer, or tooltip) without navigating away from it", "A special type of component state", "An image placed over another image"]
+      answer: 1
+      explanation: "Overlays display a frame on top of the current screen. The interaction is: On Click → Open Overlay → [target frame]. Set position (centre, bottom) and whether tapping outside closes it. Use for: confirmation dialogs, bottom sheets, dropdown menus, notification toasts."
+    - type: fill-blank
+      question: "The Figma prototype interaction that triggers when a user hovers their cursor over an element is called ___"
+      answer: "While hovering"
+      explanation: "Figma's prototype triggers include: On Click (tap/click), While Hovering (hover), On Drag, Mouse Enter, Mouse Leave, Key/Gamepad. 'While Hovering' is the standard trigger for desktop hover states — showing tooltips, changing button styles, revealing additional options."
+---
+
+## Phase 1 — Learn (50 min)
+
+**Why this matters:** A hi-fi prototype is the closest thing to a real product without writing code. It communicates visual design, interaction patterns, and animations to developers, stakeholders, and users in a language everyone understands. A well-crafted hi-fi prototype eliminates misunderstandings before development begins — which is far cheaper than fixing them after.
+
+- **Going from lo-fi to hi-fi:**
+  - Take the wireframe frames from Session 03/04 and apply: real brand colours, real typography (from your Session 06 design system), real component instances (from Session 05), real images or icon placeholders.
+  - Work screen by screen. Apply your design tokens. Replace grey boxes with styled components.
+  - Check alignment: use Figma's layout grid. Everything should snap to the grid.
+- **Figma Prototype Mode — the essentials:**
+  - *Navigate To* — the basic interaction. On Click → Navigate To → [target frame]. Used for navigation, form submissions, link clicks.
+  - *Smart Animate* — instead of an instant cut, Figma animates between matching layers. Set: On Click → Navigate To → [frame] → Transition: Smart Animate → Duration 200–300ms, Ease In Out.
+  - *Open Overlay* — displays a frame on top of the current screen. On Click → Open Overlay → [modal/drawer frame]. Set "Close when clicking outside" for modals.
+  - *Scroll* — select a frame, set "Overflow: Vertical Scrolling" in the right panel. Content inside the frame will scroll when the prototype is played.
+  - *Component Variants for states* — hover, pressed, focused states are handled by switching between Variants on mouse events. On Click → Change To [Variant], delay, then back to default.
+- **Interactive Components:**
+  - Figma allows interactions within components themselves. A toggle that animates when clicked, a checkbox that fills when selected — these use variant switching with Smart Animate.
+  - Enable Interactive Components in the prototype settings (Figma → Prototype → Enable).
+- **Prototype Flows:**
+  - In the Prototype panel, you can define multiple starting frames (Flows). One flow for onboarding, one for the main task, one for settings.
+  - Share different flows with different stakeholders (e.g. share only the onboarding flow with the marketing team).
+
+> **Key insight:** Hi-fi prototypes are expensive to build and cheap to test. Don't skip the lo-fi stage — by the time you build hi-fi, your structure should already be validated. The hi-fi prototype is for communicating and polishing, not discovering whether the navigation works.
+
+## Phase 2 — Do (50 min)
+
+Build the hi-fi prototype for your app:
+1. **Apply the design system** to the 3 wireframe screens from Session 03:
+   - Replace all grey boxes with styled components from Session 05
+   - Apply your colour tokens (from Session 06 Figma Styles) to all elements
+   - Apply typography tokens to all text
+   - Add real (or representative) images where needed
+2. **Connect the prototype:**
+   - Home → Core Task screen: On Click → Smart Animate, 250ms, Ease In Out
+   - Core Task screen → Supporting screen: On Click → Navigate To
+   - Add a modal/bottom sheet: create a separate frame for a confirmation dialog, connect with Open Overlay
+3. **Add at least one scroll frame:** if your core task screen has a list, set it to Vertical Scrolling
+4. **Test the prototype:** press ▷ and walk through all 3 screens, the modal, and the scroll
+5. Share the prototype link and test with one person — ask them to complete the same task as in Session 04. Note what changed from the lo-fi test.
+
+## Review
+
+What is the difference between using Smart Animate and a Dissolve transition in a Figma prototype? When would you choose one over the other, and how does each affect what you communicate to a developer about the intended animation?
+`;export{e as default};

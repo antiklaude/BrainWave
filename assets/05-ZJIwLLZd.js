@@ -1,0 +1,56 @@
+var e=`---
+title: "CSS Grid + Responsive Design"
+duration: 100
+level: 2
+levelLabel: "LVL 2"
+levelColor: "#7dd3fc"
+videos:
+  - id: "jV8B24rSN5o"
+    title: "CSS Grid Crash Course — Traversy Media"
+  - id: "9zBsdzdE4sM"
+    title: "CSS Grid Tutorial — Web Dev Simplified"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What does 'grid-template-columns: repeat(3, 1fr)' create?"
+      options: ["3 columns each 1 pixel wide", "3 equal-width columns that share available space", "3 columns with 1fr gap between them", "1 column that repeats 3 times"]
+      answer: 1
+      explanation: "1fr is one fraction of the available space. repeat(3, 1fr) creates 3 equal columns that together fill the container."
+    - type: multiple-choice
+      question: "What is the mobile-first approach to media queries?"
+      options: ["Write desktop styles first, then override for mobile with max-width", "Write mobile styles first, then override for larger screens with min-width", "Use only one breakpoint", "Never write CSS for mobile"]
+      answer: 1
+      explanation: "Mobile-first means the base CSS targets small screens. You add min-width media queries to enhance for larger screens. This is better for performance and maintainability."
+    - type: fill-blank
+      question: "The CSS property to set how many columns a grid item spans is ___"
+      answer: "grid-column"
+      explanation: "grid-column: 1 / 3 makes the item start at column line 1 and end at column line 3, spanning 2 columns. grid-column: span 2 is shorthand."
+---
+
+## Phase 1 — Learn (45 min)
+
+**Why this matters:** Layout is the hardest part of CSS for most beginners, because browsers had no good native tools for it until Flexbox (2012) and Grid (2017). That's why old CSS tutorials are full of float hacks and clearfixes. CSS Grid finally gives you a proper two-dimensional layout system.
+
+- **display: grid** — turns the element into a grid container. Direct children become grid items.
+- **grid-template-columns** — defines the column structure. \`200px auto 200px\` (fixed, flexible, fixed). \`repeat(3, 1fr)\` (three equal columns). \`repeat(auto-fill, minmax(250px, 1fr))\` (responsive columns that wrap automatically).
+- **grid-template-rows** — same idea for rows. Often left implicit (auto-sized by content).
+- **gap** — \`gap: 24px\` sets equal spacing between rows and columns. \`row-gap\` and \`column-gap\` control them separately.
+- **grid-column / grid-row** — \`grid-column: 1 / 3\` makes an item span from column line 1 to line 3 (2 columns wide). \`grid-column: span 2\` is equivalent shorthand.
+- **Media queries** — \`@media (min-width: 768px) { }\` — styles inside only apply when the viewport is 768px or wider. Mobile-first: write base styles for mobile, add \`min-width\` queries for larger screens.
+- **Common breakpoints** — 480px (large phones), 768px (tablets), 1024px (laptops), 1280px+ (desktops).
+
+> **Key insight:** Use \`repeat(auto-fill, minmax(250px, 1fr))\` for responsive card grids without a single media query. The grid automatically fills as many 250px-minimum columns as fit, and each column grows equally. It's one line that replaces 20 lines of responsive code.
+
+## Phase 2 — Do (45 min)
+
+- Convert the card row from Session 04 into a CSS Grid layout
+- Use \`repeat(auto-fill, minmax(260px, 1fr))\` for a self-wrapping responsive grid
+- Build a classic two-column layout: sidebar (260px fixed) + main content (flexible): \`grid-template-columns: 260px 1fr\`
+- Add a media query so the two-column layout stacks to one column below 768px
+
+## Review
+
+What is the difference between Flexbox and CSS Grid? Give an example of when you would use each one.
+`;export{e as default};

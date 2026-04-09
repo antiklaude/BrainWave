@@ -1,0 +1,61 @@
+var e=`---
+title: "CSS Basics + Box Model + DevTools"
+duration: 100
+level: 1
+levelLabel: "LVL 1"
+levelColor: "#6ee7b7"
+videos:
+  - id: "yfoY53QXEnI"
+    title: "CSS Crash Course For Absolute Beginners — Traversy Media"
+  - id: "1Rs2ND1ryYc"
+    title: "Learn CSS in 20 Minutes — Web Dev Simplified"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "In the CSS box model, what does 'padding' control?"
+      options: ["Space outside the border", "Space between the border and the content", "The border thickness", "The element's width"]
+      answer: 1
+      explanation: "Padding is inside the border — it's the space between the border and the content. Margin is outside the border."
+    - type: multiple-choice
+      question: "What does 'box-sizing: border-box' do?"
+      options: ["Adds a border automatically", "Makes padding and border included in the element's width, not added on top", "Makes all elements the same size", "Removes all padding and margin"]
+      answer: 1
+      explanation: "Without border-box, setting width: 200px and padding: 20px gives a total width of 240px. With border-box, the total stays 200px — padding eats into the content area."
+    - type: fill-blank
+      question: "The CSS selector that targets all elements with class 'card' is ___"
+      answer: ".card"
+      explanation: "Class selectors start with a dot. #id targets an ID. element targets a tag. .class targets all elements with that class."
+---
+
+## Phase 1 — Learn (45 min)
+
+**Why this matters:** Every layout bug you will ever encounter comes down to misunderstanding the box model. CSS is predictable once you know how browsers calculate space — and completely maddening when you don't. DevTools lets you inspect and fix styles in real time without editing files.
+
+- **Linking a CSS file** — \`<link rel="stylesheet" href="styles.css">\` in the \`<head>\`. All styles in \`styles.css\` apply to the HTML file.
+- **Selectors** — target elements to style:
+  - Element: \`p { }\` — all paragraphs
+  - Class: \`.card { }\` — all elements with \`class="card"\`
+  - ID: \`#header { }\` — the one element with \`id="header"\` (use sparingly)
+- **Common properties** — \`color\` (text colour), \`background-color\`, \`font-size\`, \`font-family\`, \`font-weight\`.
+- **The box model** — every element is a rectangular box made of four layers from inside out: content → padding → border → margin.
+  - \`padding\` — space inside the border (pushes content away from edges)
+  - \`border\` — the visible line around the element
+  - \`margin\` — space outside the border (pushes other elements away)
+- **box-sizing: border-box** — by default, \`width: 200px\` means the content is 200px, and padding/border is added on top. \`border-box\` includes padding and border in the 200px total. Add this to every project.
+- **Chrome DevTools** — right-click any element → Inspect. The Elements panel shows HTML on the left, CSS on the right. Click any CSS value to edit it live. The box model diagram in the Computed tab shows exact pixel values.
+
+> **Key insight:** Add \`* { box-sizing: border-box; margin: 0; padding: 0; }\` at the top of every CSS file. This resets browser defaults and makes the box model predictable. Every professional CSS project starts with this.
+
+## Phase 2 — Do (45 min)
+
+- Create \`styles.css\` and link it to the bio page from Session 01
+- Style the page: choose a colour scheme, set a \`font-family\` for the whole body, add padding and margin to sections, add a border or \`border-radius\` to the skills list
+- Open DevTools and change the padding of your header live — watch the layout update in real time
+- Experiment: remove \`box-sizing: border-box\` and add \`padding: 40px\` to a fixed-width element — observe how the total width changes
+
+## Review
+
+Draw the CSS box model from memory. Label: content, padding, border, margin. Which one is inside the border? Which is outside?
+`;export{e as default};

@@ -1,0 +1,57 @@
+var e=`---
+title: "Mini Project — Number Guesser CLI"
+duration: 120
+level: 2
+levelLabel: "LVL 2"
+levelColor: "#7dd3fc"
+videos:
+  - id: "rfscVS0vtbw"
+    title: "Learn Python – Full Course for Beginners — freeCodeCamp"
+  - id: "t8pPdKYpowI"
+    title: "Python Tutorial for Beginners (Learn Python in 5 Hours) — TechWorld with Nana"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What does random.randint(1, 10) return?"
+      options: ["A float between 1 and 10", "A random integer from 1 to 9", "A random integer from 1 to 10 inclusive", "Always 5"]
+      answer: 2
+      explanation: "random.randint(a, b) returns a random integer N where a <= N <= b. Both endpoints are included."
+    - type: multiple-choice
+      question: "What does input() return?"
+      options: ["An integer", "A float", "A string", "A boolean"]
+      answer: 2
+      explanation: "input() always returns a string, even if the user types a number. Use int() to convert it."
+    - type: fill-blank
+      question: "To use randint you must first write ___"
+      answer: "import random"
+      explanation: "random is a standard library module. You import it once at the top of the file."
+---
+
+## Phase 1 — Learn (30 min)
+
+**Why this matters:** This is your first complete program — not a snippet, not a tutorial exercise, but something that actually runs as a game. Building this will force you to connect everything from the last 5 sessions: variables, control flow, functions, and loops.
+
+- **Planning before coding** — write the game logic in plain English first (pseudocode): pick a number, ask the user, compare, give a hint, repeat until correct, print the result. If you can describe it in words, you can code it.
+- **import random** — Python's standard library includes a \`random\` module. \`import random\` at the top of your file makes it available. \`random.randint(1, 100)\` picks a random integer from 1 to 100 (inclusive on both ends).
+- **int(input(...))** — \`input()\` always returns a string. Wrap it in \`int()\` to convert to a number so you can compare it: \`guess = int(input("Your guess: "))\`.
+- **Game loop pattern** — \`while True:\` with a \`break\` when the win condition is met is the standard pattern for any interactive game or CLI tool.
+
+> **Key insight:** Write the simplest version first — no attempts counter, no difficulty. Get it working, then add features one at a time. Every feature you add before the basic version works is a risk.
+
+## Phase 2 — Do (75 min)
+
+- Write the game in this order:
+  1. Pick a random number between 1 and 100
+  2. Ask the user to guess
+  3. Tell them if it's too high, too low, or correct
+  4. Loop until they get it right
+  5. Print how many guesses it took
+- Add input validation: if they type something that isn't a number, catch the \`ValueError\` with try/except and ask again
+- **Stretch goal:** Add difficulty — easy mode gives 10 attempts, hard mode gives 5. Ask at the start. Count attempts and end the game if they run out.
+
+## Review
+
+Play your finished game. Does it handle every case: too high, too low, correct, invalid input, running out of attempts? If any of these don't work, fix them before Session 7.
+`;export{e as default};

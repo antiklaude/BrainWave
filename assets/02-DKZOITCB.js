@@ -1,0 +1,60 @@
+var e=`---
+title: "Git + Azure Repos + Branching"
+duration: 100
+level: 1
+levelLabel: "LVL 1"
+levelColor: "#6ee7b7"
+videos:
+  - id: "HVsySz-h9r4"
+    title: "Git & GitHub Crash Course For Beginners — Traversy Media"
+  - id: "4BibQ69MD8c"
+    title: "Azure DevOps Tutorial for Beginners — TechWorld with Nana"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What does 'git commit -m \\"message\\"' do?"
+      options: ["Saves your changes to GitHub", "Creates a save point of your staged changes with a descriptive message", "Pushes your changes to the remote", "Merges your branch"]
+      answer: 1
+      explanation: "A commit is a save point in Git — it records exactly what changed and when. The -m flag lets you write the message inline."
+    - type: multiple-choice
+      question: "Why should you never commit directly to the main branch?"
+      options: ["Git prevents it technically", "main is the production branch — unreviewed changes there can break live systems immediately", "It's slower", "You need admin rights"]
+      answer: 1
+      explanation: "main (or master) is typically deployed to production. Direct commits skip code review and testing, which can introduce bugs that go live immediately."
+    - type: fill-blank
+      question: "The Git command to create and switch to a new branch in one step is ___"
+      answer: "git checkout -b branch-name"
+      explanation: "git checkout -b creates the branch and switches to it. Alternatively: git switch -c branch-name (newer syntax)."
+---
+
+## Phase 1 — Learn (45 min)
+
+**Why this matters:** Git is the foundation of all modern software development. Every change to code, every bug fix, every feature — tracked as a commit. Azure Repos is Git hosted in your Azure DevOps organisation, with extra features for pull requests and policies. If you've never used Git, think of commits as save points in a video game — you can always go back to one.
+
+- **git init** — initialises a new Git repository in the current folder. Creates a hidden \`.git\` directory.
+- **git clone URL** — downloads an existing repository from Azure Repos (or GitHub) to your machine.
+- **git add filename** — stages a file for the next commit. \`git add .\` stages all changed files.
+- **git commit -m "message"** — creates a save point with a description of what changed. Write messages in present tense: "Add login form", not "Added login form".
+- **git push** — sends your local commits to the remote (Azure Repos). \`git push origin branch-name\` for a specific branch.
+- **git pull** — downloads the latest commits from the remote and merges them into your current branch.
+- **git branch** — lists all branches. \`git branch feature/login\` creates a new branch.
+- **git checkout -b branch-name** — creates and switches to a new branch in one command.
+- **git merge branch-name** — merges commits from another branch into the current one. Better practice: merge via Pull Request in Azure Repos.
+- **Branching strategy** — \`main\` is sacred. Create a feature branch for every piece of work: \`feature/add-login\`, \`fix/header-alignment\`. Merge to \`main\` only via Pull Request after review.
+
+> **Key insight:** Never commit directly to \`main\`. Always branch, work, and merge via Pull Request. A codebase where anyone can push to main without review is a codebase where one accident can take down production.
+
+## Phase 2 — Do (45 min)
+
+- Clone your Azure Repos repository to your local machine
+- Create a feature branch: \`git checkout -b feature/hello-world\`
+- Create a file \`hello.txt\` with any content
+- Stage, commit, and push: \`git add hello.txt && git commit -m "Add hello world file" && git push origin feature/hello-world\`
+- Go to Azure Repos in the browser — verify your branch and commit appear in the UI
+
+## Review
+
+What is the difference between \`git add\`, \`git commit\`, and \`git push\`? Can you describe what each does in one sentence?
+`;export{e as default};

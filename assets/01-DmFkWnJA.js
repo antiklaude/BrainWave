@@ -1,0 +1,65 @@
+var e=`---
+title: "Variables, Data Types + f-strings"
+duration: 90
+level: 1
+levelLabel: "LVL 1"
+levelColor: "#6ee7b7"
+videos:
+  - id: "rfscVS0vtbw"
+    title: "Learn Python – Full Course for Beginners — freeCodeCamp"
+  - id: "_uQrJ0TkZlc"
+    title: "Python Tutorial for Beginners — Programming with Mosh"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What does type(3.14) return?"
+      options: ["<class 'int'>", "<class 'float'>", "<class 'str'>", "<class 'bool'>"]
+      answer: 1
+      explanation: "3.14 has a decimal point so Python classifies it as a float."
+    - type: multiple-choice
+      question: "Which of these is a valid f-string?"
+      options: ["f'Hello name'", "'Hello {name}'", "f'Hello {name}'", "f(Hello {name})"]
+      answer: 2
+      explanation: "An f-string needs the f prefix before the quote AND curly braces around the variable name."
+    - type: fill-blank
+      question: "To check the type of a variable x, you write ___"
+      answer: "type(x)"
+      explanation: "type() is a built-in function that returns the data type of any value."
+---
+
+## Phase 1 — Learn (40 min)
+
+**Why this matters:** Every program you ever write stores information in variables. Variables are how a program remembers things between steps — the user's name, the current score, the price of an item. Without variables, your code can only compute once and throw the result away.
+
+- **Variable assignment** — \`name = "Alice"\` creates a labelled container called \`name\` and puts \`"Alice"\` inside it. The \`=\` sign is not maths equality — it means "store this value here."
+- **int** — whole numbers: \`age = 25\`, \`score = 0\`. No quotes. Used for counting and arithmetic.
+- **float** — numbers with a decimal point: \`price = 9.99\`, \`temp = 36.6\`. Python uses floats for any measurement that isn't exact.
+- **str** — text, always wrapped in quotes: \`name = "Alice"\` or \`name = 'Alice'\`. Either quote style works.
+- **bool** — exactly two values: \`True\` or \`False\` (capital first letter). The foundation of every decision a program makes.
+- **type()** — pass any value in and Python tells you what type it is: \`type(42)\` → \`<class 'int'>\`. Your first debugging tool.
+- **print()** — displays output to the terminal: \`print("Hello")\`. Pass multiple values: \`print("Age:", age)\`.
+- **f-strings** — prefix a string with \`f\` and put variable names inside \`{}\`: \`f"Hello, {name}! You are {age} years old."\` Python evaluates the \`{}\` at runtime and substitutes the value.
+
+> **Key insight:** Python is dynamically typed — you never declare a type, Python infers it from the value to the right of \`=\`. You can even reassign: \`x = 5\` then \`x = "hello"\` is perfectly legal, though rarely a good idea.
+
+## Phase 2 — Do (40 min)
+
+- Open a new file \`session01.py\`
+- Create one variable of each type: an \`int\`, a \`float\`, a \`str\`, and a \`bool\`
+- Use \`print(type(variable))\` on each to confirm what Python sees
+- Write an f-string that uses at least three of your variables in one sentence
+- Try: assign \`x = 10\`, then \`x = x + 5\`, then \`print(x)\` — predict the output before running
+- Bonus: \`print(f"Price with tax: {price * 1.2:.2f}")\` — the \`:.2f\` inside the braces rounds to 2 decimal places
+
+## Review
+
+Without running Python, what does this print?
+\`\`\`python
+name = "Jordan"
+age = 28
+print(f"{name} will be {age + 2} in two years.")
+\`\`\`
+If you can't answer, reread the f-strings bullet above and run it yourself.
+`;export{e as default};

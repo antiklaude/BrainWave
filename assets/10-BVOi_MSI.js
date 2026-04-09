@@ -1,0 +1,59 @@
+var e=`---
+title: "APIs + JSON + requests"
+duration: 100
+level: 4
+levelLabel: "LVL 4"
+levelColor: "#f472b6"
+videos:
+  - id: "rfscVS0vtbw"
+    title: "Learn Python – Full Course for Beginners — freeCodeCamp"
+  - id: "t8pPdKYpowI"
+    title: "Python Tutorial for Beginners (Learn Python in 5 Hours) — TechWorld with Nana"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What does a 404 status code mean?"
+      options: ["Success", "Server error", "Resource not found", "Unauthorized"]
+      answer: 2
+      explanation: "404 means the resource wasn't found. 200 = success, 401 = unauthorized, 500 = server error."
+    - type: multiple-choice
+      question: "What does response.json() return?"
+      options: ["A JSON string", "A Python dict or list", "A file object", "A bytes object"]
+      answer: 1
+      explanation: "response.json() parses the JSON response body and returns a Python dict or list, ready to work with."
+    - type: fill-blank
+      question: "The requests library method to make a GET request is ___"
+      answer: "requests.get(url)"
+      explanation: "requests.get(url) sends a GET request and returns a Response object with status_code, json(), text, etc."
+---
+
+## Phase 1 — Learn (45 min)
+
+**Why this matters:** Most modern applications are connected — they fetch weather data, stock prices, social media posts, or sports scores from external services. An API is a menu: you place an order (a request), the server prepares it, and sends back the data. Once you can work with APIs, the internet becomes a giant database you can query from Python.
+
+- **What an API is** — an API (Application Programming Interface) is a structured way for one program to request data or actions from another. A weather API lets your script ask "what's the temperature in London?" and get back structured data.
+- **HTTP requests** — your script sends an HTTP request to a URL. The server processes it and sends back a response.
+- **Status codes** — \`200\` means success, \`404\` means not found, \`401\` means unauthorized, \`429\` means you're making too many requests, \`500\` means the server broke.
+- **requests.get(url)** — sends a GET request. Returns a \`Response\` object.
+- **response.status_code** — the numeric status code of the response.
+- **response.json()** — parses the response body as JSON and returns a Python dict or list. Use this for almost every API response.
+- **Query parameters** — many APIs accept parameters: \`requests.get(url, params={"city": "London", "units": "metric"})\`. The \`requests\` library encodes them correctly.
+- **Open-Meteo** — a free weather API with no API key required. Base URL: \`https://api.open-meteo.com/v1/forecast\`. Use latitude/longitude as parameters.
+
+> **Key insight:** Always check \`response.status_code\` before calling \`.json()\`. If the status is 404 or 500, the body may not be valid JSON at all, and your program will crash with a confusing error.
+
+## Phase 2 — Do (45 min)
+
+- Use the Open-Meteo API to fetch the current temperature for a hardcoded city:
+  - First use \`https://geocoding-api.open-meteo.com/v1/search?name=London\` to get latitude and longitude
+  - Then use those coordinates with \`https://api.open-meteo.com/v1/forecast?latitude=51.5&longitude=-0.13&current_weather=true\`
+- Parse the JSON response and print: city name, temperature, and wind speed
+- Handle the case where the city is not found (status 400 or empty results)
+- **Stretch:** ask the user to input a city name instead of hardcoding it
+
+## Review
+
+What is the difference between a query parameter and a request body? When you call \`requests.get(url, params={"key": "value"})\`, where does \`key=value\` end up in the actual HTTP request?
+`;export{e as default};

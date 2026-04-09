@@ -1,0 +1,60 @@
+var e=`---
+title: "Intro to pandas + CSV Analysis"
+duration: 100
+level: 4
+levelLabel: "LVL 4"
+levelColor: "#f472b6"
+videos:
+  - id: "rfscVS0vtbw"
+    title: "Learn Python – Full Course for Beginners — freeCodeCamp"
+  - id: "_uQrJ0TkZlc"
+    title: "Python Tutorial for Beginners — Programming with Mosh"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What does df.head() return?"
+      options: ["The column names only", "The first 5 rows", "A summary of statistics", "The last 5 rows"]
+      answer: 1
+      explanation: "df.head() returns the first 5 rows by default. Pass a number to change it: df.head(10)."
+    - type: multiple-choice
+      question: "How do you filter a DataFrame to only rows where the 'age' column is over 30?"
+      options: ["df.filter('age > 30')", "df[df['age'] > 30]", "df.where(age > 30)", "df.select(age > 30)"]
+      answer: 1
+      explanation: "df[df['age'] > 30] creates a boolean mask (True/False for each row) and uses it to filter the DataFrame."
+    - type: fill-blank
+      question: "The pandas function to load a CSV file into a DataFrame is ___"
+      answer: "pd.read_csv()"
+      explanation: "pd.read_csv('filename.csv') reads the file and returns a DataFrame with columns from the CSV headers."
+---
+
+## Phase 1 — Learn (45 min)
+
+**Why this matters:** pandas turns Python into a spreadsheet that you can program. Instead of manually parsing CSV files line by line, pandas lets you load a whole dataset in one line and answer questions like "what's the average age by department?" in another. This is why data scientists use Python instead of Excel.
+
+- **import pandas as pd** — the standard convention. \`pd\` is the alias everyone uses.
+- **pd.read_csv('file.csv')** — loads a CSV file into a DataFrame. The first row becomes the column names.
+- **df.head()** — shows the first 5 rows. \`df.tail()\` shows the last 5. Pass a number to change the count.
+- **df.shape** — returns \`(rows, columns)\` as a tuple. Quick way to see how big your dataset is.
+- **df.describe()** — shows count, mean, std, min, max, and quartiles for all numeric columns. Run this before anything else on a new dataset.
+- **df.columns** — lists all column names.
+- **Filtering** — \`df[df['age'] > 30]\` returns only rows where age > 30. The expression in brackets creates a boolean Series that acts as a mask.
+- **groupby** — \`df.groupby('category')['price'].mean()\` groups rows by a column and computes an aggregate. This is the single most powerful operation in pandas.
+- **df.plot()** — creates a quick matplotlib chart from the DataFrame. \`df.plot(kind='bar')\` for a bar chart.
+
+> **Key insight:** A DataFrame is a table. A Series is a single column. Every column operation returns a Series; most DataFrame operations return a DataFrame. Once you understand this distinction, pandas becomes much more predictable.
+
+## Phase 2 — Do (45 min)
+
+- Download the Titanic dataset: \`pd.read_csv('https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv')\`
+- Answer these 3 questions using pandas:
+  1. What is the average age of passengers who survived vs those who didn't?
+  2. How many passengers were in each passenger class (1st, 2nd, 3rd)?
+  3. What was the most common embarkation port?
+- Plot a bar chart of passenger count by class
+
+## Review
+
+What does \`df.groupby('Survived')['Age'].mean()\` compute? Describe the output in plain English before running it.
+`;export{e as default};

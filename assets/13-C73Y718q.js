@@ -1,0 +1,59 @@
+var e=`---
+title: "Web Scraping with BeautifulSoup"
+duration: 110
+level: 5
+levelLabel: "LVL 5"
+levelColor: "#a78bfa"
+videos:
+  - id: "rfscVS0vtbw"
+    title: "Learn Python – Full Course for Beginners — freeCodeCamp"
+  - id: "t8pPdKYpowI"
+    title: "Python Tutorial for Beginners (Learn Python in 5 Hours) — TechWorld with Nana"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What is robots.txt used for?"
+      options: ["Blocking hackers", "Telling scrapers which pages they are allowed to access", "Encrypting web traffic", "Speeding up page loads"]
+      answer: 1
+      explanation: "robots.txt is a file at the root of a website that specifies which paths scrapers/bots should not access. Always check it before scraping."
+    - type: multiple-choice
+      question: "What does soup.find_all('a') return?"
+      options: ["The first <a> tag", "All <a> tags as a list", "All text inside <a> tags", "An error if no <a> tags exist"]
+      answer: 1
+      explanation: "find_all() returns a list of all matching tags. find() returns only the first match."
+    - type: fill-blank
+      question: "To get the text content of a BeautifulSoup tag element, access its ___ attribute"
+      answer: ".text"
+      explanation: "tag.text returns the visible text inside the HTML tag, stripping out all HTML markup."
+---
+
+## Phase 1 — Learn (45 min)
+
+**Why this matters:** Not every website has an API. When a site has data you need but no API to access it, scraping lets you extract that data directly from the HTML. News archives, product prices, job listings, research data — scraping unlocks all of it. Used responsibly, it's one of the most powerful data collection tools available to a Python developer.
+
+- **When scraping is legal** — always check the site's \`robots.txt\` (e.g. \`books.toscrape.com/robots.txt\`) and Terms of Service. Don't scrape behind a login, don't scrape personal data, don't hammer a server with rapid requests. \`books.toscrape.com\` exists specifically for practice — it's always safe to scrape.
+- **requests + BeautifulSoup** — \`requests.get(url)\` fetches the HTML, \`BeautifulSoup(html, 'html.parser')\` parses it into a navigable tree.
+- **Installing bs4** — \`pip install beautifulsoup4\`. Import as \`from bs4 import BeautifulSoup\`.
+- **soup.find(tag)** — returns the first matching tag. \`soup.find('h1')\` finds the first h1.
+- **soup.find_all(tag)** — returns a list of all matching tags. \`soup.find_all('a')\` finds all links.
+- **tag.text** — the visible text inside a tag, with HTML stripped.
+- **tag.get('href')** — gets the value of an attribute. \`a.get('href')\` extracts the link URL.
+- **Selecting with CSS** — \`soup.select('.price_color')\` selects all elements with that class name. More precise than tag-only searching.
+
+> **Key insight:** Websites change. A scraper that works today may break next week if the site updates its HTML structure. Scraping is inherently brittle — write your selectors to be as specific as needed but no more.
+
+## Phase 2 — Do (55 min)
+
+- Scrape \`http://books.toscrape.com\` (it's a practice site, safe to scrape):
+  1. Fetch the homepage HTML with \`requests.get()\`
+  2. Find all book titles and prices on the first page
+  3. Store each as a dict: \`{"title": ..., "price": ...}\`
+  4. Save the list of books to \`books.csv\` using Python's built-in \`csv\` module
+- Handle the case where the request fails (status code check with try/except)
+
+## Review
+
+What is the difference between \`soup.find()\` and \`soup.find_all()\`? When would you use \`.select()\` instead of \`.find_all()\`?
+`;export{e as default};

@@ -1,0 +1,75 @@
+var e=`---
+title: "Information Architecture + Wireframes"
+duration: 100
+level: 2
+levelLabel: "LVL 2"
+levelColor: "#7dd3fc"
+videos:
+  - id: "Ibe6f_IrWYI"
+    title: "Information Architecture for UX Designers — CareerFoundry"
+  - id: "KdfO_e0yK-g"
+    title: "How to Wireframe — UX Mastery"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What is the purpose of wireframes in the design process?"
+      options: ["To show the client the final visual design before development", "To map out the structure and layout of screens without colour or styling — focusing on content placement and user flow before visual decisions", "To test performance and load times", "To document the codebase"]
+      answer: 1
+      explanation: "Wireframes are deliberately grey and unstyled. This is intentional — it forces feedback about structure (is this content in the right place?) rather than aesthetics (I don't like that blue). Adding colour too early biases feedback toward visual preferences and away from structural problems."
+    - type: multiple-choice
+      question: "What does a sitemap represent in information architecture?"
+      options: ["The physical location of web servers", "A visual hierarchy showing all screens/pages and how they connect to each other — the navigation structure of the product", "A technical map of database tables", "The layout grid of a single screen"]
+      answer: 1
+      explanation: "A sitemap is the bird's-eye view of the entire product. Each box is a screen or page. Lines between boxes show how users navigate. A clear sitemap reveals whether users need too many clicks to reach important content, or whether the hierarchy is confusing."
+    - type: fill-blank
+      question: "The research method where participants organise topics written on cards into groups, revealing how they mentally categorise information, is called ___ sorting"
+      answer: "card"
+      explanation: "Card sorting reveals users' mental models — how they expect information to be organised. Open card sorting lets users create and name their own groups. Closed card sorting asks users to sort cards into predefined categories. Both reveal mismatches between how designers and users think about organisation."
+---
+
+## Phase 1 — Learn (45 min)
+
+**Why this matters:** Wireframes feel reductive — why draw grey boxes when you could be designing? Because grey boxes force you to make decisions about structure without being distracted by colour and polish. Fix the structure first. If navigation is broken at the wireframe stage, it's a 5-minute fix. If it's broken in a polished hi-fi prototype, it costs hours to redo. Information architecture is the skeleton — wireframes are the blueprint.
+
+- **Information Architecture (IA):**
+  - IA is how content is organised, labelled, and navigated. Good IA means users can find what they need without thinking. Bad IA means users wander and give up.
+  - *Mental model* — the way a user expects something to be organised, based on their experience. Good IA matches the user's mental model, not the organisation's internal structure.
+  - *Card sorting* — a research method. Write each piece of content/feature on a card. Ask 5–10 users to sort the cards into groups that make sense to them and name each group. The patterns reveal how users organise information mentally.
+  - *Labelling* — the words used for navigation (tabs, categories, buttons) matter enormously. "Resources" is vague. "Tutorials and guides" is clear. Use the words your users use, not internal jargon.
+- **Sitemaps:**
+  - A diagram showing every screen/page in the product and the navigation paths between them. Each node = a screen. Lines = navigation links.
+  - Build a sitemap before wireframing — it forces you to decide what screens exist and how they connect before designing any individual screen.
+  - Check: can users reach every important screen in 3 clicks or fewer from the home screen?
+- **Wireframe conventions:**
+  - Greyscale only. No colour, no brand fonts, no images (use X-filled boxes for image placeholders).
+  - Real content where it matters (navigation labels, key headings), placeholder text elsewhere.
+  - Annotate decisions: "Tap here goes to Settings screen" or "This list is scrollable — max 20 items"
+  - Tools: Figma (recommended), Balsamiq, pen and paper. Speed matters at this stage — don't spend more than 15 minutes on a single screen wireframe.
+- **Wireframe levels:**
+  - *Lo-fi (paper/rough sketch)* — done in minutes. Great for early exploration.
+  - *Mid-fi (grey digital)* — the standard deliverable. Shows layout and content structure clearly.
+  - *Hi-fi* — colour + real components. That's Session 07.
+
+> **Key insight:** Wireframes exist to fail fast. The goal is to expose structural problems before you've invested hours in visual design. Show wireframes to real users as early as possible — their confusion about grey boxes is far cheaper to fix than confusion about polished screens.
+
+## Phase 2 — Do (45 min)
+
+Create a sitemap and wireframes for your app:
+1. **Sitemap** — draw a sitemap for the app you're designing (the problem from Session 01):
+   - List all the screens the app needs (don't design them yet — just list them)
+   - Arrange in a hierarchy: home screen → main sections → sub-screens
+   - Draw connecting lines to show navigation paths
+   - Check: can users reach every important screen in 3 clicks or fewer?
+2. **Wireframe 3 key screens** in Figma (or on paper):
+   - Home / Dashboard screen
+   - Core task screen (the main thing users do)
+   - A supporting screen (settings, profile, or a detail view)
+   - Use only grey rectangles, lines, and text. No colours.
+   - Add annotations explaining non-obvious interactions
+
+## Review
+
+What is the difference between a sitemap and a wireframe? At what point in the design process would you show each to a client, and what kind of feedback would you expect from each?
+`;export{e as default};

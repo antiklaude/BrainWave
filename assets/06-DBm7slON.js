@@ -1,0 +1,78 @@
+var e=`---
+title: "Design Systems + Style Guides + Accessibility"
+duration: 100
+level: 3
+levelLabel: "LVL 3"
+levelColor: "#fbbf24"
+videos:
+  - id: "EK-pHkc5EL4"
+    title: "Design Systems Explained — AJ&Smart"
+  - id: "YLo6g58vUm0"
+    title: "Figma Accessibility and Contrast — Figma"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What is the WCAG AA minimum contrast ratio for body text?"
+      options: ["2:1", "3:1", "4.5:1", "7:1"]
+      answer: 2
+      explanation: "WCAG 2.1 AA requires a 4.5:1 contrast ratio for normal text (under 18pt / 14pt bold) and 3:1 for large text (18pt+ / 14pt+ bold). This ensures text is readable by people with low vision or colour deficiencies. WCAG AAA requires 7:1 for normal text."
+    - type: multiple-choice
+      question: "What is a design token?"
+      options: ["A password used to access design files", "A named variable that stores a design decision (e.g. color-primary = #3B82F6, spacing-4 = 16px) — the single source of truth for design decisions shared between designers and developers", "A special type of Figma component", "A certificate for completing a design course"]
+      answer: 1
+      explanation: "Design tokens are named variables for design decisions. Instead of manually writing '#3B82F6' everywhere, you reference the token 'color-primary'. When the brand colour changes, you update one token and the change propagates everywhere — in Figma and in the codebase."
+    - type: fill-blank
+      question: "The minimum size of a touch target (button or interactive element) recommended by WCAG and Apple/Google guidelines is ___ × ___ pixels"
+      answer: "44"
+      explanation: "Both Apple's HIG and Google's Material Design guidelines (aligned with WCAG success criterion 2.5.5) recommend minimum 44×44px touch targets. Smaller targets cause mis-taps, particularly on small phones or for users with motor difficulties."
+---
+
+## Phase 1 — Learn (45 min)
+
+**Why this matters:** A design system is a shared language between designers and developers. Without one, every designer makes slightly different decisions, and every developer interprets those decisions differently. The result is inconsistency that accumulates into a product that feels fragmented. Accessibility is not optional or nice-to-have — it's a legal requirement in many countries, and it improves usability for every user, not just users with disabilities.
+
+- **Design System Anatomy:**
+  - *Foundation/Tokens* — the base layer: colour palette, typography scale, spacing scale, border radii, shadows. These are defined once and referenced everywhere.
+  - *Components* — the building blocks: buttons, inputs, cards, navigation, modals. Built from the tokens.
+  - *Patterns* — how components combine to solve common problems: form layout, empty states, loading states, error handling.
+  - *Documentation* — guidelines for when and how to use components. Without documentation, a design system is just a component library.
+- **Design Tokens:**
+  - Colour tokens: \`color-primary\`, \`color-secondary\`, \`color-error\`, \`color-neutral-100\` through \`color-neutral-900\`
+  - Semantic colour tokens: \`color-background\`, \`color-text-primary\`, \`color-text-secondary\`, \`color-border\`
+  - Spacing tokens: \`spacing-1 = 4px\`, \`spacing-2 = 8px\`, \`spacing-4 = 16px\`, \`spacing-8 = 32px\` (4px base scale)
+  - Typography tokens: \`font-heading-1\`, \`font-body\`, \`font-caption\` — each storing font size, weight, and line height
+- **WCAG Accessibility (Level AA):**
+  - *Colour contrast*: body text requires 4.5:1 ratio. Large text (18pt+) requires 3:1. Check with the Figma Contrast plugin (A11y Focus Orderer, Contrast) or the WebAIM contrast checker.
+  - *Touch targets*: minimum 44×44px for any interactive element. Buttons too small to tap reliably are an accessibility failure.
+  - *Focus states*: every interactive element must have a visible focus indicator (the blue ring you see when tabbing through a web page). Designers often hide these — they must be present in the final design.
+  - *Colour alone*: never convey information through colour alone. An error state that's only red fails users with colour blindness. Add an icon or text label.
+  - *Alt text*: decorative images need no alt text. Informational images need descriptive alt text (handled in development, but designed into the system).
+
+> **Key insight:** Accessible design is better design for everyone. Large touch targets help users with motor disabilities — and users on bumpy buses. High contrast helps users with low vision — and users in bright sunlight. Alt text helps screen reader users — and search engines. Accessibility constraints almost always improve the design for all users.
+
+## Phase 2 — Do (45 min)
+
+Define your app's design system tokens:
+1. Create a "Design System" page in your Figma file
+2. **Colour tokens** — define your palette:
+   - 1 primary brand colour + 2 lighter/darker shades
+   - 1 secondary accent colour
+   - Neutral scale (white, 3–4 greys, black)
+   - Semantic: error (red), warning (amber), success (green), info (blue)
+   - Use Figma Styles (right panel → Styles) to save each colour as a named style
+3. **Contrast check** — for every foreground/background combination:
+   - Dark text on white background
+   - White text on primary colour
+   - Text on secondary colour
+   - Use the WebAIM contrast checker (webaim.org/resources/contrastchecker) or Figma's Contrast plugin
+   - Record: Pass or Fail AA for each combination. Fix any that fail.
+4. **Typography tokens** — define 4 text styles (H1, H2, Body, Caption) and save as Figma Text Styles
+5. **Spacing scale** — document your spacing tokens as coloured rectangles with labels (4, 8, 16, 24, 32, 48, 64px)
+6. Update your Session 05 components to use the new styles — verify all buttons meet the 44×44px minimum
+
+## Review
+
+Why are semantic colour tokens (like \`color-error\` = red) more valuable than naming tokens by their colour (\`color-red\`)? What happens to your design system if the brand changes its primary colour from blue to teal?
+`;export{e as default};

@@ -1,0 +1,65 @@
+var e=`---
+title: "Advanced Slicing + Support Strategies"
+duration: 100
+level: 3
+levelLabel: "LVL 3"
+levelColor: "#fbbf24"
+videos:
+  - id: "v2XMoQtlRWk"
+    title: "Cura Advanced Settings Tutorial — The 3D Print General"
+  - id: "fcpBHR4GHnA"
+    title: "Tree Supports vs Normal Supports in Cura — CNC Kitchen"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What is the main advantage of Tree Supports over Normal (Linear) supports?"
+      options: ["They are stronger and more structurally reliable", "They touch fewer areas of the print surface, resulting in less surface scarring and easier removal", "They use less material", "They print faster"]
+      answer: 1
+      explanation: "Tree supports grow branches that only contact the overhanging geometry (not the model sides), leaving fewer marks. Linear supports create a dense grid that often leaves visible scarring on the supported surface. For cosmetically important surfaces, tree supports are the better choice."
+    - type: multiple-choice
+      question: "What does the 'Support Interface' setting do in Cura?"
+      options: ["It controls the look of supports in the layer preview", "It adds a special dense layer at the top of supports, creating a smoother surface where the print rests on them and improving separation", "It makes supports visible in the final model", "It sets the support overlap with the model"]
+      answer: 1
+      explanation: "Support interface layers are dense, smooth layers at the top (and optionally bottom) of support structures. They create a better surface quality on the bridged/supported area and make supports easier to remove cleanly. Often printed in a different material (like PVA) on dual-extrusion printers."
+    - type: fill-blank
+      question: "The Cura feature that creates an ultra-smooth top surface by slowly moving the nozzle over it after printing is called ___"
+      answer: "Ironing"
+      explanation: "Ironing passes the heated nozzle slowly over the top surface after it's printed, melting any ridges between lines and creating a nearly flat, glossy surface. It adds print time but dramatically improves top surface finish on visible flat areas."
+---
+
+## Phase 1 — Learn (45 min)
+
+**Why this matters:** Most beginner-friendly Cura profiles use safe, conservative settings that produce acceptable but not optimal results. Advanced slicing lets you make deliberate trade-offs: faster print with tree supports, smoother top surfaces with ironing, stronger parts with variable layer heights. These settings are the difference between a hobbyist print and a professional-quality output.
+
+- **Tree Supports vs Linear (Normal) Supports:**
+  - *Normal/Linear*: dense grid structure. Reliable, stronger. Leaves grid marks on the supported surface. Hard to remove from complex geometry.
+  - *Tree*: branches grow from the bed upward to touch only the overhanging areas. Less surface contact = less scarring. Easier to remove. Slightly less reliable on very large overhangs.
+  - **Recommendation:** use Tree for organic shapes and visible surfaces. Use Normal for structural parts or large flat overhangs.
+- **Support Interface Layers** — Cura: Support → Enable Support Interface. Adds a dense smooth layer at the top of supports. The print surface that rests on supports will be much cleaner. Enable "Support Interface: Top" (not always needed on bottom).
+- **Support Z Distance** — the gap between the top of supports and the model surface. Too small = hard to remove, may fuse. Too large = model surface sags into the gap. Default 0.2mm is usually correct for PLA.
+- **Ironing** — Top/Bottom → Enable Ironing. Passes the nozzle slowly over the top surface after printing each top layer. Results in a nearly flat, glossy top. Adds ~5–15% print time. Use for parts where top surface appearance matters.
+- **Variable Layer Height** — Slicing → Adaptive Layers. Automatically uses thicker layers (faster) where geometry is simple and thinner layers (more detail) where geometry is complex or curved. Best of both worlds for organic shapes.
+- **Printing in Parts (splitting models)** — some models are easier to print as multiple pieces then glue/bolt together. Split the model in Meshmixer or Fusion 360, design alignment pins (keyed joints), and print each piece in the optimal orientation.
+- **Saving Profiles** — Cura: three-line menu → Manage Profiles → Create Profile from Current Settings. Save different profiles for each filament brand/colour and printer. Load them instantly without re-entering every setting.
+
+> **Key insight:** Support removal is where most surface damage happens. Before printing a model with supports, ask: "Can I redesign this to eliminate or reduce the overhangs?" If not, use tree supports + interface layers and plan the removal carefully (needle-nose pliers, flush cutters). Prevention is better than post-processing.
+
+## Phase 2 — Do (45 min)
+
+Slice a complex model using tree supports and ironing:
+1. Download a model with significant overhangs — a miniature figure, a vase with a protruding handle, or similar from Thingiverse or Printables
+2. Import into Cura and orient it for minimum overhang
+3. **Compare support settings:**
+   - Slice once with Normal supports (default), note estimated print time and support volume
+   - Slice again with Tree supports + Support Interface (top only), compare time and support volume
+4. Enable Ironing on the top surface (Top/Bottom → Ironing)
+5. Enable Adaptive Layers (Experimental → Adaptive Layers)
+6. Slice and review the layer preview — check that tree supports reach all overhangs and that ironing is applied to the correct surfaces
+7. If you have a printer, print it. Compare the two support types after removal if possible.
+
+## Review
+
+A client wants the smoothest possible top surface finish on a flat-topped box. List three slicer settings you would adjust and explain what each one does to improve top surface quality.
+`;export{e as default};

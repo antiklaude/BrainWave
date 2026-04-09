@@ -1,0 +1,58 @@
+var e=`---
+title: "Contrast, White Space + Visual Hierarchy"
+duration: 90
+level: 2
+levelLabel: "LVL 2"
+levelColor: "#7dd3fc"
+videos:
+  - id: "a5KYlHNKQB8"
+    title: "Beginning Graphic Design: Layout and Composition — GCFLearnFree"
+  - id: "YqQx75OPRa0"
+    title: "Design Principles: The 4 Rules of Design — DesignCourse"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What contrast ratio does WCAG AA require for normal body text?"
+      options: ["2:1", "3:1", "4.5:1", "7:1"]
+      answer: 2
+      explanation: "WCAG AA requires a 4.5:1 contrast ratio for text under 18pt (or 14pt bold). Large text (18pt+) requires only 3:1. WCAG AAA requires 7:1 for normal text."
+    - type: multiple-choice
+      question: "What is 'negative space' in design?"
+      options: ["Space filled with dark colors", "The empty area around and between elements that guides attention and creates breathing room", "Space below the fold", "Areas with no color contrast"]
+      answer: 1
+      explanation: "Negative space (white space) is not wasted space — it's an active design element. It creates breathing room, guides the eye, and makes content feel premium rather than cluttered."
+    - type: fill-blank
+      question: "Visual hierarchy means controlling what the viewer sees ___ in a design"
+      answer: "first"
+      explanation: "Visual hierarchy dictates the order in which the eye reads a design — what's seen first, second, third. You control it with size, weight, color, contrast, and position."
+---
+
+## Phase 1 — Learn (40 min)
+
+**Why this matters:** Every design has an unintentional visual hierarchy — the eye always moves somewhere first. Your job is to make that hierarchy intentional. And contrast isn't just visual interest — it's a legal accessibility requirement. Designs that fail contrast standards exclude users with visual impairments.
+
+- **Visual hierarchy** — the order in which a viewer reads your design. Controlled by: size (larger = earlier), weight (bolder = earlier), color (higher contrast = earlier), position (top-left in Western reading order = first).
+- **Size contrast** — a 48px headline vs 16px body text creates clear hierarchy. A 24px headline vs 20px body text creates confusion.
+- **Colour contrast** — the ratio between foreground and background colour luminance. Low contrast = hard to read, especially for people with visual impairments. Tools: WebAIM Contrast Checker (webaim.org/resources/contrastchecker/).
+- **WCAG AA standard** — the minimum accessibility requirement for text contrast: 4.5:1 for normal text, 3:1 for large text (18pt+ or 14pt bold). Most professional work targets AA minimum.
+- **Negative space (white space)** — empty areas in a design. Counter-intuitively, more white space signals higher quality. Luxury brands use massive white space. Busy designs feel cheap. White space guides the eye to what matters.
+- **Grouping with space** — items that belong together should have less space between them than items that don't. Proximity (from Session 03) is created through differential spacing.
+- **The fold** — the area visible without scrolling. Critical content and the primary action should be above the fold. Don't bury the most important element at the bottom.
+
+> **Key insight:** When a design feels "off" but you can't identify why, check hierarchy first. Usually one of two things: everything is the same size (no contrast), or everything is competing for attention (no clear first read). Pick one element to be the most important and make it undeniably so.
+
+## Phase 2 — Do (40 min)
+
+- Go to webaim.org/resources/contrastchecker/ and test 3 real websites you use:
+  - Find one that passes WCAG AA
+  - Find one that fails (more common than you'd expect)
+  - Find the specific text element that fails and note which colour combination caused it
+- Redesign the failing element with a passing colour combination that still fits the brand's look
+- Create a simple mock design with 3 elements (headline, subtext, button) — arrange them to have clear visual hierarchy: one most important, one second, one supporting
+
+## Review
+
+A client shows you a design where the headline and body text are both #555555 on white. The headline is 18px bold and the body is 14px regular. Which one fails WCAG AA? Check with the contrast checker.
+`;export{e as default};
