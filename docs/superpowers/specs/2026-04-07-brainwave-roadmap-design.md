@@ -81,20 +81,58 @@ No changes. Existing accordion session list, video modals, quick-check quizzes, 
 
 ---
 
-### Tab 3 — Final Quiz
+### Tab 3 — Achievement (always present, content varies by course type)
 
-**Access rule:** Tab is visible always but locked (disabled, with a lock icon and "Complete all sessions to unlock" tooltip) until `progress` in the Zustand store shows 100% of sessions marked complete for that course.
+The tab label and content adapts based on whether the course has a final quiz defined.
 
-**Quiz source:** Each course can have a `final-quiz.md` file at `src/data/courses/{course-id}/final-quiz.md`. Format already specified in `docs/CONTENT-GUIDE.md`. If no file exists, the tab shows a "Coming soon" placeholder.
+---
+
+#### Course type A — Knowledge/Code courses (with `final-quiz.md`)
+
+Tab label: **Final Quiz**
+
+**Unlock rule:** Locked until all sessions are marked complete. Shows a lock icon with "Complete all sessions to unlock" tooltip while locked.
+
+**Quiz source:** `src/data/courses/{course-id}/final-quiz.md`. Format specified in `docs/CONTENT-GUIDE.md`.
 
 **Quiz flow (inline, not modal):**
 1. Intro screen — title, question count, pass mark (e.g. 70%), Start button
 2. One question at a time — no going back
 3. After each answer: immediate feedback (correct/incorrect + explanation)
 4. Results screen — score, pass/fail state, list of wrong answers with correct answers shown, Retake button
-5. On pass: certificate screen (see Phase 5 Gamification for certificate design)
+5. On pass: certificate screen (see below)
 
-**State:** Quiz attempt state lives in component-local state (not persisted). Retaking resets it. Pass/fail outcome is written to Zustand `progress` store as `finalQuizPassed: true` per course.
+**Certificate condition:** All sessions complete + final quiz passed.
+
+**State:** Quiz attempt state lives in component-local state (not persisted). Retaking resets it. Pass/fail written to Zustand `progress` store as `finalQuizPassed: true` per course.
+
+---
+
+#### Course type B — Creative/Hands-on courses (no `final-quiz.md`)
+
+Tab label: **Achievement**
+
+**Unlock rule:** Locked until all sessions complete AND all available quick-check quizzes are passed. Same lock icon + tooltip while locked.
+
+Shows a course wrap-up screen:
+- Summary of what was covered (session titles + genres/topics)
+- Quick-check quiz pass count (e.g. "8/8 quizzes passed")
+- "You've completed the course" message
+- Certificate section (see below)
+
+**Certificate condition:** All sessions complete + all quick-check quizzes passed.
+
+---
+
+#### Certificate screen (shared, both course types)
+
+Full-screen celebration on unlock:
+- BrainWave logo + course accent colour
+- "Course Complete" heading
+- Learner name (prompted once on first certificate, stored in localStorage)
+- Course name + completion date
+- **Download Certificate** button — generates a styled PDF client-side via `jsPDF` (no server needed)
+- **Share on LinkedIn** button — pre-fills a LinkedIn share URL with course name and BrainWave link
 
 ---
 
