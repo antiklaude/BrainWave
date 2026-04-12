@@ -5,6 +5,7 @@ import { loadSessions } from '../utils/parseSessions'
 import { useProgress } from '../hooks/useProgress'
 import CourseSidebar from '../components/course/CourseSidebar'
 import SessionPanel from '../components/course/SessionPanel'
+import CourseCompanion from '../components/course/companion/CourseCompanion'
 import ProgressBar from '../components/ui/ProgressBar'
 import QuizModal from '../components/quiz/QuizModal'
 import { Clock, BookOpen, BarChart3 } from 'lucide-react'
@@ -22,6 +23,9 @@ export default function CoursePage() {
 
   const { completed, toggle, markComplete, percent } = useProgress(courseId)
   const pct = percent(sessions.length)
+
+  // Derive current level from progress
+  const currentLevel = Math.min(course.levels, Math.max(1, Math.ceil((completed.size / Math.max(1, sessions.length)) * course.levels)))
 
   useEffect(() => {
     if (!course) return
@@ -387,6 +391,13 @@ export default function CoursePage() {
           )}
         </div>
       </div>
+
+      {/* Right Sidebar — Companion Lab (Desktop Big Screens) */}
+      <CourseCompanion 
+        course={course} 
+        currentLevel={currentLevel} 
+        sessions={sessions}
+      />
 
       {/* Quiz modal */}
       {quizSession && (

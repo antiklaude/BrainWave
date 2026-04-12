@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import YouTube from 'react-youtube'
-import { X, ExternalLink, AlertCircle, Loader } from 'lucide-react'
+import { X, ExternalLink, AlertCircle, Loader, ChevronLeft, ChevronRight, Play, Maximize2 } from 'lucide-react'
 
 const ERROR_MESSAGES = {
   2:  'Invalid video ID.',
@@ -10,19 +10,57 @@ const ERROR_MESSAGES = {
   150: 'The video owner does not allow embedded playback.',
 }
 
-export default function VideoModal({ videoId, title, onClose }) {
+/**
+ * Cinema Mode Video Modal
+ * Implements an immersive theater-grade video experience.
+ */
+export default function VideoModal({ 
+  videoId, 
+  title, 
+  start, 
+  onClose,
+  playlist = [], // Array of {id, title} for session nav
+  currentIndex = 0,
+  onNavigate // function(newIndex)
+}) {
   const [status, setStatus] = useState('loading') // loading | ready | error
   const [errorMsg, setErrorMsg] = useState('')
+  const [showControls, setShowControls] = useState(true)
+  const [isClosing, setIsClosing] = useState(false)
+  const controlsTimeout = useRef(null)
+
+  // Auto-hide controls after inactivity
+  const handleMouseMove = useCallback(() => {
+    setShowControls(true)
+    if (controlsTimeout.current) clearTimeout(controlsTimeout.current)
+    controlsTimeout.current = setTimeout(() => {
+      setShowControls(false)
+    }, 3000)
+  }, [])
+
+  const handleClose = useCallback(() => {
+    setIsClosing(true)
+    setTimeout(onClose, 300) // Match animation duration
+  }, [onClose])
 
   useEffect(() => {
-    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    const handler = (e) => { 
+      if (e.key === 'Escape') handleClose()
+      if (e.key === 'ArrowRight' && onNavigate && currentIndex < playlist.length - 1) onNavigate(currentIndex + 1)
+      if (e.key === 'ArrowLeft' && onNavigate && currentIndex > 0) onNavigate(currentIndex - 1)
+    }
     document.addEventListener('keydown', handler)
     document.body.style.overflow = 'hidden'
+    
+    // Reset timeout on mount
+    handleMouseMove()
+
     return () => {
       document.removeEventListener('keydown', handler)
       document.body.style.overflow = ''
+      if (controlsTimeout.current) clearTimeout(controlsTimeout.current)
     }
-  }, [onClose])
+  }, [handleClose, onNavigate, currentIndex, playlist.length, handleMouseMove])
 
   const ytOpts = {
     width: '100%',
@@ -32,304 +70,373 @@ export default function VideoModal({ videoId, title, onClose }) {
       rel: 0,
       modestbranding: 1,
       color: 'white',
+      iv_load_policy: 3,
+      ...(start ? { start } : {}),
     },
   }
 
+  const hasNext = onNavigate && currentIndex < playlist.length - 1
+  const hasPrev = onNavigate && currentIndex > 0
+
   return (
     <div
-      onClick={onClose}
+      onClick={handleClose}
+      onMouseMove={handleMouseMove}
+      className={`cinema-modal ${isClosing ? 'closing' : ''}`}
       style={{
         position: 'fixed',
         inset: 0,
         zIndex: 1000,
-        background: 'var(--modal-bg)',
+        background: 'rgba(0, 0, 0, 0.85)',
+        backdropFilter: 'blur(12px)',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 24,
+        cursor: showControls ? 'default' : 'none',
+        transition: 'opacity 0.3s ease',
+        animation: 'cinema-fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
-      <div
+      {/* Background Glow matching Course Brand */}
+      <div style={{
+        position: 'absolute',
+        width: '60vw',
+        height: '60vh',
+        background: 'radial-gradient(circle, var(--accent-alpha, rgba(var(--accent-rgb), 0.15)) 0%, transparent 70%)',
+        pointerEvents: 'none',
+        zIndex: 0,
+      }} />
+
+      {/* Top Bar (Auto-hide) */}
+      <div 
         onClick={e => e.stopPropagation()}
+        className={`cinema-bar top ${showControls ? 'visible' : ''}`}
         style={{
-          width: '100%',
-          maxWidth: 920,
-          background: '#0a0a0a',
-          borderRadius: 'var(--radius)',
-          overflow: 'hidden',
-          boxShadow: '0 32px 96px rgba(0,0,0,0.9)',
-          border: '1px solid rgba(255,255,255,0.08)',
-        }}
-      >
-        {/* Header */}
-        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 72,
+          padding: '0 32px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '12px 16px',
-          background: 'var(--bg2)',
-          borderBottom: '1px solid var(--border)',
-          gap: 12,
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
-            {status === 'loading' && (
-              <Loader size={14} style={{ color: 'var(--accent)', flexShrink: 0, animation: 'spin 1s linear infinite' }} />
-            )}
-            <span style={{
-              color: 'var(--text)',
-              fontSize: 14,
-              fontWeight: 500,
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%)',
+          zIndex: 10,
+          transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease',
+          opacity: showControls ? 1 : 0,
+          transform: showControls ? 'translateY(0)' : 'translateY(-100%)',
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <Play size={14} fill="var(--accent)" color="var(--accent)" />
+            <span style={{ 
+              color: 'var(--text)', 
+              fontSize: 16, 
+              fontWeight: 600,
+              letterSpacing: '-0.01em'
             }}>
               {title}
             </span>
           </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-            <a
-              href={`https://www.youtube.com/watch?v=${videoId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Watch on YouTube"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 5,
-                padding: '5px 10px',
-                background: 'var(--bg3)',
-                border: '1px solid var(--border)',
-                borderRadius: 6,
-                color: 'var(--text-muted)',
-                textDecoration: 'none',
-                fontSize: 12,
-                transition: 'color 0.15s, border-color 0.15s',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.color = '#ff4444'
-                e.currentTarget.style.borderColor = '#ff444440'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.color = 'var(--text-muted)'
-                e.currentTarget.style.borderColor = 'var(--border)'
-              }}
-            >
-              <ExternalLink size={12} />
-              YouTube
-            </a>
-            <button
-              onClick={onClose}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: 'var(--text-muted)',
-                cursor: 'pointer',
-                display: 'flex',
-                padding: 4,
-                borderRadius: 4,
-              }}
-            >
-              <X size={18} />
-            </button>
-          </div>
+          {playlist.length > 1 && (
+            <span style={{ color: 'var(--text-dim)', fontSize: 12, marginLeft: 22 }}>
+              Video {currentIndex + 1} of {playlist.length} in this session
+            </span>
+          )}
         </div>
 
-        {/* Player area */}
-        <div style={{ position: 'relative', paddingBottom: '56.25%', background: '#000' }}>
-          {/* Loading overlay */}
-          {status === 'loading' && (
-            <div style={{
-              position: 'absolute',
-              inset: 0,
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <a
+            href={`https://www.youtube.com/watch?v=${videoId}${start ? `&t=${start}s` : ''}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cinema-link"
+            style={{
               display: 'flex',
-              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 8,
+              padding: '8px 16px',
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: 100,
+              color: '#fff',
+              textDecoration: 'none',
+              fontSize: 13,
+              fontWeight: 500,
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <ExternalLink size={14} />
+            YouTube
+          </a>
+          <button
+            onClick={handleClose}
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              color: '#fff',
+              cursor: 'pointer',
+              display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              background: '#0a0a0a',
-              zIndex: 2,
-              gap: 12,
-            }}>
-              <img
-                src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
-                alt=""
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  opacity: 0.3,
-                  filter: 'blur(2px)',
-                }}
-              />
-              <div style={{
-                position: 'relative',
-                zIndex: 3,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: 10,
-              }}>
-                <div style={{
-                  width: 40,
-                  height: 40,
-                  border: '3px solid rgba(255,255,255,0.1)',
-                  borderTopColor: 'var(--accent)',
-                  borderRadius: '50%',
-                  animation: 'bw-spin 0.8s linear infinite',
-                }} />
-                <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12 }}>Loading player…</span>
-              </div>
-            </div>
-          )}
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+            onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+          >
+            <X size={20} />
+          </button>
+        </div>
+      </div>
 
-          {/* Error state */}
-          {status === 'error' && (
-            <div style={{
+      {/* Main Content Area */}
+      <div 
+        onClick={e => e.stopPropagation()}
+        style={{
+          width: '100%',
+          maxWidth: 1280,
+          aspectRatio: '16/9',
+          position: 'relative',
+          zIndex: 5,
+          boxShadow: '0 0 100px rgba(0,0,0,0.5)',
+          borderRadius: 12,
+          overflow: 'hidden',
+          background: '#000',
+          animation: 'cinema-scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      >
+        {/* Navigation Overlays */}
+        {hasPrev && showControls && (
+          <button
+            onClick={() => onNavigate(currentIndex - 1)}
+            style={{
               position: 'absolute',
-              inset: 0,
+              left: 20,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              zIndex: 20,
+              width: 56,
+              height: 56,
+              borderRadius: '50%',
+              background: 'rgba(0,0,0,0.4)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              color: '#fff',
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              background: '#0a0a0a',
-              zIndex: 2,
-              gap: 16,
-              padding: 24,
-            }}>
-              <img
-                src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
-                alt=""
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  opacity: 0.15,
-                  filter: 'blur(4px)',
-                }}
-              />
-              <div style={{
-                position: 'relative',
-                zIndex: 3,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: 12,
-                textAlign: 'center',
-              }}>
-                <div style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: '50%',
-                  background: 'rgba(248,113,113,0.1)',
-                  border: '1px solid rgba(248,113,113,0.3)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <AlertCircle size={24} color="#f87171" />
-                </div>
-                <div>
-                  <p style={{ color: '#f4f4f4', fontWeight: 600, marginBottom: 6, fontSize: 15 }}>
-                    Video unavailable
-                  </p>
-                  <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13, maxWidth: 320, lineHeight: 1.5 }}>
-                    {errorMsg || 'This video cannot be played here.'}
-                  </p>
-                </div>
-                <a
-                  href={`https://www.youtube.com/watch?v=${videoId}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '10px 24px',
-                    background: '#ff0000',
-                    borderRadius: 8,
-                    color: '#fff',
-                    textDecoration: 'none',
-                    fontWeight: 600,
-                    fontSize: 14,
-                    marginTop: 4,
-                  }}
-                >
-                  <ExternalLink size={15} />
-                  Watch on YouTube
-                </a>
-              </div>
-            </div>
-          )}
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            <ChevronLeft size={32} />
+          </button>
+        )}
 
-          {/* YouTube player */}
+        {hasNext && showControls && (
+          <button
+            onClick={() => onNavigate(currentIndex + 1)}
+            style={{
+              position: 'absolute',
+              right: 20,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              zIndex: 20,
+              width: 56,
+              height: 56,
+              borderRadius: '50%',
+              background: 'rgba(0,0,0,0.4)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              color: '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            <ChevronRight size={32} />
+          </button>
+        )}
+
+        {/* Loading/Error Overlays same as before but styled for Cinema */}
+        {status === 'loading' && (
           <div style={{
             position: 'absolute',
             inset: 0,
-            opacity: status === 'ready' ? 1 : 0,
-            transition: 'opacity 0.3s ease',
-          }}>
-            <YouTube
-              videoId={videoId}
-              opts={ytOpts}
-              style={{ width: '100%', height: '100%' }}
-              className="yt-player"
-              onReady={() => setStatus('ready')}
-              onError={(e) => {
-                setErrorMsg(ERROR_MESSAGES[e.data] || 'This video cannot be embedded.')
-                setStatus('error')
-              }}
-            />
-          </div>
-        </div>
-
-        {/* Footer bar */}
-        {status === 'ready' && (
-          <div style={{
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'flex-end',
-            padding: '8px 16px',
-            background: 'var(--bg2)',
-            borderTop: '1px solid var(--border)',
+            justifyContent: 'center',
+            background: '#0a0a0a',
+            zIndex: 15,
+            gap: 16,
           }}>
+            <div className="cinema-loader" style={{
+              width: 48,
+              height: 48,
+              border: '4px solid rgba(255,255,255,0.1)',
+              borderTopColor: 'var(--accent)',
+              borderRadius: '50%',
+              animation: 'bw-spin 0.8s linear infinite',
+            }} />
+            <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, fontWeight: 500 }}>Preparing cinema experience…</span>
+          </div>
+        )}
+
+        {status === 'error' && (
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#0a0a0a',
+            zIndex: 15,
+            padding: 40,
+            textAlign: 'center',
+          }}>
+            <AlertCircle size={48} color="#f87171" style={{ marginBottom: 20 }} />
+            <h3 style={{ color: '#fff', fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Playback Issue</h3>
+            <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: 400, lineHeight: 1.6, marginBottom: 24 }}>
+              {errorMsg || 'This video could not be played in cinema mode.'}
+            </p>
             <a
               href={`https://www.youtube.com/watch?v=${videoId}`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
+                background: '#ff0000',
+                color: '#fff',
+                padding: '12px 32px',
+                borderRadius: 12,
+                textDecoration: 'none',
+                fontWeight: 600,
                 display: 'flex',
                 alignItems: 'center',
-                gap: 5,
-                fontSize: 11,
-                color: 'var(--text-dim)',
-                textDecoration: 'none',
-                fontFamily: 'var(--mono)',
+                gap: 10,
               }}
-              onMouseEnter={e => e.currentTarget.style.color = 'var(--text-muted)'}
-              onMouseLeave={e => e.currentTarget.style.color = 'var(--text-dim)'}
             >
-              <ExternalLink size={10} />
-              Open in YouTube
+              <ExternalLink size={18} />
+              Open on YouTube
             </a>
           </div>
         )}
+
+        {/* YouTube player */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          opacity: status === 'ready' ? 1 : 0,
+          transition: 'opacity 0.5s ease',
+        }}>
+          <YouTube
+            videoId={videoId}
+            opts={ytOpts}
+            style={{ width: '100%', height: '100%' }}
+            className="yt-player"
+            onReady={() => setStatus('ready')}
+            onError={(e) => {
+              setErrorMsg(ERROR_MESSAGES[e.id] || 'This video cannot be embedded.')
+              setStatus('error')
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Bottom Controls (Auto-hide) */}
+      <div 
+        onClick={e => e.stopPropagation()}
+        className={`cinema-bar bottom ${showControls ? 'visible' : ''}`}
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 80,
+          padding: '0 32px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)',
+          zIndex: 10,
+          transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease',
+          opacity: showControls ? 1 : 0,
+          transform: showControls ? 'translateY(0)' : 'translateY(100%)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+          <button 
+            disabled={!hasPrev}
+            onClick={() => onNavigate(currentIndex - 1)}
+            style={{ 
+              background: 'none', border: 'none', color: hasPrev ? '#fff' : 'rgba(255,255,255,0.2)', 
+              cursor: hasPrev ? 'pointer' : 'default', display: 'flex', alignItems: 'center', gap: 8,
+              fontSize: 14, fontWeight: 500
+            }}
+          >
+            <ChevronLeft size={20} /> Previous
+          </button>
+          
+          <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
+          
+          <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, minWidth: 100, textAlign: 'center' }}>
+            {playlist.length > 0 ? `Video ${currentIndex + 1} of ${playlist.length}` : 'Cinema Mode'}
+          </span>
+
+          <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
+
+          <button 
+            disabled={!hasNext}
+            onClick={() => onNavigate(currentIndex + 1)}
+            style={{ 
+              background: 'none', border: 'none', color: hasNext ? '#fff' : 'rgba(255,255,255,0.2)', 
+              cursor: hasNext ? 'pointer' : 'default', display: 'flex', alignItems: 'center', gap: 8,
+              fontSize: 14, fontWeight: 500
+            }}
+          >
+            Next <ChevronRight size={20} />
+          </button>
+        </div>
       </div>
 
       <style>{`
-        @keyframes bw-spin {
-          to { transform: rotate(360deg); }
+        @keyframes cinema-fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes cinema-scale-in {
+          from { opacity: 0; transform: scale(0.95) translateY(10px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .cinema-modal.closing {
+          opacity: 0 !important;
+          pointer-events: none;
         }
         .yt-player iframe {
           width: 100% !important;
           height: 100% !important;
+          border: none !important;
         }
         .yt-player, .yt-player > div {
           width: 100% !important;
           height: 100% !important;
+        }
+        .cinema-link:hover {
+          background: rgba(255,255,255,0.15) !important;
+          border-color: rgba(255,255,255,0.2) !important;
+          transform: translateY(-1px);
+        }
+        @keyframes bw-spin {
+          to { transform: rotate(360deg); }
         }
       `}</style>
     </div>

@@ -216,6 +216,10 @@ export default function SessionPanel({ session, index, completed, onToggle, onQu
         <VideoModal
           videoId={videoModal.id}
           title={videoModal.title}
+          start={videoModal.start}
+          playlist={session.videos}
+          currentIndex={session.videos.findIndex(v => v.id === videoModal.id)}
+          onNavigate={(newIndex) => setVideoModal(session.videos[newIndex])}
           onClose={() => setVideoModal(null)}
         />
       )}
