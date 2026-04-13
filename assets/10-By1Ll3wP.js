@@ -1,0 +1,75 @@
+var e=`---
+title: "Release Pipelines + Deploy Strategies"
+duration: 110
+level: 4
+levelLabel: "LVL 4"
+levelColor: "#f472b6"
+videos:
+  - id: "4BibQ69MD8c"
+    title: "Azure DevOps Tutorial for Beginners — TechWorld with Nana"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What does 'dependsOn: Build' in a pipeline stage do?"
+      options: ["Copies files from the Build stage", "Ensures the Deploy stage only runs if the Build stage succeeded", "Makes the stages run in parallel", "Shares variables between stages"]
+      answer: 1
+      explanation: "dependsOn creates a dependency — the stage only runs after its dependency succeeds. Remove it (or set dependsOn: []) for parallel stages."
+    - type: multiple-choice
+      question: "What is the difference between a rolling and a canary deployment strategy?"
+      options: ["Rolling deploys to all instances at once; canary deploys in batches", "Rolling updates instances gradually in batches; canary routes a small % of traffic to the new version first", "They are identical", "Canary is for mobile; rolling is for web"]
+      answer: 1
+      explanation: "Rolling updates instances one-by-one (or in batches). Canary sends a percentage of real traffic to the new version — usually 5-10% — to validate it before full rollout."
+    - type: fill-blank
+      question: "The YAML keyword to define a deployment job (as opposed to a regular job) is ___"
+      answer: "deployment"
+      explanation: "deployment: is the job type that supports deployment strategies and environments. Regular jobs use job:. Only deployment jobs can reference environments and use strategy blocks."
+---
+
+## Phase 1 — Learn (45 min)
+
+**Why this matters:** A two-stage pipeline (Build → Deploy) is the foundation of Continuous Delivery. But how you deploy matters as much as that you deploy. Deploying everything at once to production is risky. Rolling and canary strategies reduce risk by gradually shifting traffic to the new version.
+
+- **Multi-stage YAML** — stages let you organise the pipeline into phases with explicit dependencies:
+  \`\`\`yaml
+  stages:
+    - stage: Build
+      jobs:
+        - job: BuildJob
+          steps:
+            - script: echo "Building..."
+    
+    - stage: Deploy
+      dependsOn: Build
+      jobs:
+        - deployment: DeployApp
+          environment: 'production'
+          strategy:
+            runOnce:
+              deploy:
+                steps:
+                  - task: AzureWebApp@1
+                    inputs:
+                      azureSubscription: 'sc-azure-prod'
+                      appName: 'myapp'
+  \`\`\`
+- **runOnce** — the simplest strategy. All deployment steps run once. Good for App Services, functions, and any stateless deployment.
+- **rolling** — for multiple instances (VMs, containers). Updates instances in batches. If one batch fails, the rollout stops.
+- **canary** — splits traffic: \`preDeploymentSteps\` checks health, then a percentage of instances receive the new version, then a final health check, then full rollout. Requires a load balancer that can split traffic.
+- **Stages and approval gates** — you can add pre/post-deployment approvals to any stage. The pipeline pauses and waits for a human to approve before continuing.
+
+> **Key insight:** For most teams starting with CI/CD, \`runOnce\` is the right strategy. Rolling and canary require multiple instances and traffic management infrastructure. Don't over-engineer your first pipeline — ship working deployments, then add sophistication.
+
+## Phase 2 — Do (50 min)
+
+- Create a two-stage pipeline: Build stage (install + test) → Deploy stage (deploy to Azure App Service)
+- Add \`dependsOn: Build\` to the Deploy stage
+- Run it — verify the build artifacts from stage 1 are used in stage 2
+- Add a second environment (\`production\`) and a second deploy stage that deploys to production after staging
+- Make the production stage depend on staging
+
+## Review
+
+What happens to the Deploy stage if the Build stage fails? How would you configure the pipeline so Deploy to Production only runs after Deploy to Staging succeeds?
+`;export{e as default};

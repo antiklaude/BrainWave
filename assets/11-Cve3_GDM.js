@@ -1,0 +1,83 @@
+var e=`---
+title: "Cycles vs EEVEE — Settings + Use Cases"
+duration: 90
+level: 4
+levelLabel: "LVL 4"
+levelColor: "#f472b6"
+videos:
+  - id: "25N775uHb_4"
+    title: "Blender Beginner Tutorial — Part 9: Rendering — Blender Guru"
+  - id: "8Mwhjjavwv0"
+    title: "Cycles vs EEVEE — When to Use Which — BlenderNation"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What is the fundamental technical difference between Cycles and EEVEE?"
+      options: ["Cycles only works on GPU, EEVEE only works on CPU", "Cycles uses path tracing (physically simulates light bounces), EEVEE uses rasterization (approximates lighting in real time)", "EEVEE produces higher quality images", "They are identical in quality but different in interface"]
+      answer: 1
+      explanation: "Cycles path-traces light rays, simulating multiple bounces off surfaces — this is how real light works, producing accurate global illumination, caustics, and reflections. EEVEE rasterizes: it uses screen-space tricks to approximate the same effects, which is much faster but less physically accurate."
+    - type: multiple-choice
+      question: "What does the Denoiser do in Cycles rendering?"
+      options: ["It removes noise from the audio track", "It uses AI to reconstruct a clean image from a low-sample noisy render, reducing render time significantly", "It smooths the mesh geometry", "It reduces texture file size"]
+      answer: 1
+      explanation: "Cycles renders accumulate light samples — more samples = cleaner but slower. The Intel Open Image Denoiser (or OptiX on NVIDIA) applies machine learning to reconstruct a clean render from far fewer samples, dramatically cutting render time without sacrificing perceived quality."
+    - type: fill-blank
+      question: "In Cycles, the render setting that controls how many light paths are traced per pixel is called ___"
+      answer: "Samples"
+      explanation: "Render Samples (Render Properties → Sampling → Render) controls how many light rays Cycles traces per pixel. Higher samples = less noise = longer render. 128 is fine for previews, 512–1024 for final renders, 2048+ for very detailed scenes."
+---
+
+## Phase 1 — Learn (40 min)
+
+**Why this matters:** Choosing the wrong render engine costs you hours of waiting (using Cycles for a quick preview) or produces a mediocre result (using EEVEE for a photorealistic product shot). Understanding what each engine does and when to use it is essential professional knowledge.
+
+- **Cycles — Path Tracing:**
+  - Physically simulates light. Rays bounce off surfaces, scatter, refract. Handles global illumination, accurate shadows, caustics (light focusing through glass), and subsurface scattering.
+  - Slower: a complex scene can take minutes to hours per frame.
+  - Use for: product visualisation, architectural renders, photorealistic character work, any scene where quality is the priority.
+  - Key settings:
+    - *Render Samples* — 128 preview, 512–1024 final. More samples = less noise.
+    - *Denoiser* — enables Intel OIDN or NVIDIA OptiX AI denoiser. Reduces samples needed.
+    - *Max Bounces* — how many times a light ray bounces. Light (12), Diffuse (4), Glossy (4). Lowering reduces noise at the cost of accuracy.
+    - *GPU Rendering* — set in Preferences → System → CUDA/OptiX/Metal. GPU is 5–20× faster than CPU.
+- **EEVEE — Real-Time Rasterization:**
+  - Approximates lighting using screen-space effects. Works like a game engine.
+  - Near-instant previews, final renders in seconds.
+  - Limitations: no real global illumination (use Irradiance Volumes), no caustics, reflections are screen-space only (disappear if off-screen).
+  - Use for: motion graphics, stylised renders, quick concept work, animation previews, when render time is a constraint.
+  - Key settings:
+    - *Bloom* — glow on bright surfaces
+    - *Screen Space Reflections* — enables reflective surfaces (floor, metal)
+    - *Ambient Occlusion* — contact shadows in corners and crevices
+    - *Shadow Map Resolution* — controls shadow sharpness
+- **EEVEE Next (Blender 4.x)** — significantly improved EEVEE with path-guided lighting approximation, much closer to Cycles quality at still fast speeds. In newer Blender versions, "EEVEE" refers to EEVEE Next.
+
+> **Key insight:** Use EEVEE while you build the scene, Cycles for the final render. Switching is a single click in Render Properties → Render Engine. Your materials work in both engines — there's no need to rebuild anything.
+
+## Phase 2 — Do (40 min)
+
+Render the crate scene from Sessions 07–10 in both engines:
+1. Open the scene with the textured crate and 3-point lighting
+2. **EEVEE render:**
+   - Set Render Engine to EEVEE
+   - Enable Screen Space Reflections and Ambient Occlusion in Render Properties
+   - Press F12 to render — note the time taken
+   - Save as \`crate_eevee.png\`
+3. **Cycles render:**
+   - Set Render Engine to Cycles
+   - Set Device to GPU (if available)
+   - Set Render Samples to 256
+   - Enable the Denoiser (Render Properties → Sampling → Denoise)
+   - Press F12 — note the time taken
+   - Save as \`crate_cycles.png\`
+4. Open both images side by side. Identify:
+   - Where do the shadows differ?
+   - Are reflections or ambient occlusion noticeable between them?
+   - Was the quality difference worth the render time difference for this scene?
+
+## Review
+
+A client needs 300 animation frames rendered overnight on a single laptop. Which render engine would you choose and why? What settings would you adjust to get the fastest acceptable quality?
+`;export{e as default};

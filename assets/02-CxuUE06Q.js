@@ -1,0 +1,68 @@
+var e=`---
+title: "Personas + Journey Maps + Competitor Analysis"
+duration: 100
+level: 1
+levelLabel: "LVL 1"
+levelColor: "#6ee7b7"
+videos:
+  - id: "mSxpVRo3BLg"
+    title: "How To Create A Customer Journey Map — UX Mastery"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What is the most important rule when creating a user persona?"
+      options: ["The persona should represent your ideal customer", "The persona must be based on real research data from actual users — not invented assumptions", "Each persona needs a stock photo and a name", "Personas should represent the most tech-savvy users to aim for"]
+      answer: 1
+      explanation: "Personas based on assumptions are fiction. Personas based on research are tools. If you invent a persona without talking to any real users, you're designing for an imaginary person. Interview 3–5 people and let patterns in their answers form the persona."
+    - type: multiple-choice
+      question: "What does a journey map reveal that a persona alone cannot?"
+      options: ["The user's demographic information", "The emotional highs and lows a user experiences across the stages of completing a goal — including pain points and moments of delight", "The visual design preferences of the user", "The user's device preferences"]
+      answer: 1
+      explanation: "A persona is a static profile. A journey map is dynamic — it shows the sequence of steps a user takes to accomplish a goal and how they feel at each step. Pain points on the map are design opportunities. Delight moments show what to preserve."
+    - type: fill-blank
+      question: "The research technique where you give users a set of topics written on cards and ask them to sort them into groups they find logical is called ___ sorting"
+      answer: "card"
+      explanation: "Card sorting is used to understand how users mentally group and label information. Open card sorting (users create their own groups and labels) reveals user mental models. Closed card sorting (users sort into predefined groups) validates an existing structure."
+---
+
+## Phase 1 — Learn (45 min)
+
+**Why this matters:** Personas and journey maps are not deliverables for a client presentation — they are thinking tools. A persona makes an abstract "user" concrete: when you're deciding between two design options, you can ask "what would Maya do?" instead of guessing. A journey map shows you where users are suffering, which tells you exactly where to focus your design effort.
+
+- **User Personas:**
+  - A persona is a fictional but research-based profile of a user type. It includes: name, age, role/occupation, goals (what they want to achieve), frustrations (what stops them), tech comfort level, and a representative quote.
+  - One persona per distinct user group. For most apps, 2–3 personas is enough. Don't create 10 personas — it dilutes focus.
+  - **Research-first rule:** interview at least 3 real users before writing a persona. Look for patterns: if 3 out of 4 interviewees mention the same frustration, that frustration belongs in the persona.
+  - Include a quote from a real interview if possible. "I just want it to work without reading instructions" is more powerful than any assumption.
+- **User Journey Maps:**
+  - A journey map visualises a user completing a specific goal, broken into stages (e.g. Awareness → Sign Up → First Use → Regular Use → Renewal or Churn).
+  - For each stage, record: *Actions* (what the user does), *Thoughts* (what they're thinking), *Emotions* (how they feel — use a scale from frustrated to delighted), *Pain Points* (what goes wrong), *Opportunities* (what could be better).
+  - The emotional arc is the most valuable part — dips in the emotion line mark where design investment will have the most impact.
+- **Competitor Analysis:**
+  - Evaluate 3–5 direct and indirect competitors. For each, assess:
+    - *Onboarding* — how hard is it to sign up and get started?
+    - *Core task flow* — can you complete the main task without help?
+    - *Visual design* — does it feel trustworthy and appropriate for the audience?
+    - *Accessibility* — is it usable with keyboard only? Is the contrast adequate?
+  - Identify gaps: what are all competitors doing badly? What does none of them offer? These are opportunities.
+
+> **Key insight:** The journey map's emotional arc tells you where to invest design effort. A sharp dip in emotion (frustration peak) is worth more attention than five minor irritations spread across the flow. Fix the biggest pain first.
+
+## Phase 2 — Do (45 min)
+
+Build a persona and journey map for your project app:
+1. **Persona** — based on the app you audited in Session 01:
+   - Write one persona using this structure: Name / Age / Occupation / Main goal with the app / 3 frustrations / tech comfort level (1–5) / one direct quote (real or representative)
+   - If possible, interview one real person who uses a similar app for 15 minutes and base the persona on their actual responses
+2. **Journey Map** — map the journey of your persona completing the main task in the app:
+   - Stages: Aware of app → Downloads / Visits → Sets up account → Completes core task → Returns for a second use
+   - For each stage: 1 action, 1 thought, an emotion score (1–5), one pain point
+   - Mark the lowest emotion score — this is your primary design opportunity
+3. **Competitor analysis** — pick 2 competitor apps or sites in the same space. For each: rate onboarding ease, core task flow quality, and one specific gap you noticed. Keep this brief (3–4 bullet points per competitor).
+
+## Review
+
+How does a persona help you make better design decisions than designing for "everyone"? What did your journey map reveal about where users struggle that the persona alone wouldn't have shown?
+`;export{e as default};

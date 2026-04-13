@@ -1,0 +1,56 @@
+var e=`---
+title: "Canva for Rapid Design"
+duration: 90
+level: 3
+levelLabel: "LVL 3"
+levelColor: "#fbbf24"
+videos:
+  - id: "CSlQtvLRhVk"
+    title: "Canva Tutorial for Beginners — Kevin Stratvert"
+quiz:
+  type: quick-check
+  passMark: 60
+  questions:
+    - type: multiple-choice
+      question: "What is Canva's 'Magic Resize' feature used for?"
+      options: ["Automatically improving image quality", "Resizing a design to different platform dimensions in one click", "Removing image backgrounds", "Changing font sizes automatically"]
+      answer: 1
+      explanation: "Magic Resize takes one design and generates versions for different platforms (Instagram square, Instagram story, Twitter, LinkedIn, etc.) automatically. You tweak each, but the core design work is done once."
+    - type: multiple-choice
+      question: "When should you use Canva instead of Figma?"
+      options: ["Always — Canva is better", "For rapid social media content, presentations, and quick marketing materials where iteration speed matters more than precision", "For app design", "For print work only"]
+      answer: 1
+      explanation: "Canva excels at speed and accessibility. For complex UI design, brand systems, or developer handoff, Figma is the right tool. For a social post needed in 20 minutes, Canva wins."
+    - type: fill-blank
+      question: "The Canva feature that stores your brand's logo, colors, and fonts for reuse across all designs is called ___"
+      answer: "Brand Kit"
+      explanation: "Brand Kit (available on paid plans) centralises your brand assets. Once configured, your brand colours and fonts appear first in every design — no more hunting for hex codes."
+---
+
+## Phase 1 — Learn (35 min)
+
+**Why this matters:** Canva is not a designer's tool — it's a communicator's tool. It's what a marketing manager uses to produce social content, what a small business owner uses to make a flyer, what a team uses to create slide decks quickly. Knowing when to use Canva vs Figma is itself a professional skill.
+
+- **When to use Canva** — social media posts, quick presentations, event posters, email headers, YouTube thumbnails, marketing collateral. When the deadline is short and the design doesn't need to be pixel-perfect or developer-ready.
+- **When to use Figma** — app and web UI design, design systems, developer handoff, anything that requires precise measurements or component logic.
+- **Templates** — Canva's primary value proposition. Don't start from a blank canvas — find a template that's close to what you need and adapt it. The platform has thousands of free templates for every platform and format.
+- **Brand Kit** — available on paid plans (free trial is often available). Upload your logo, set your brand colours and fonts. They appear at the top of every panel when you're designing.
+- **Magic Resize** — design once, resize to any platform. Instagram square → Instagram Story → Facebook Cover → LinkedIn Banner in seconds. Each resized version may need small tweaks, but the heavy lifting is done.
+- **Export formats** — PNG (transparent background available), JPG (smaller file, no transparency), PDF (for print, presentations), MP4/GIF (for animations).
+
+> **Key insight:** Start with a template even if you'll change 80% of it. Starting from blank is slower and produces worse first drafts for most people. The template gives you proportions, hierarchy, and spacing to react to — even if you change everything, that scaffold guides your decisions.
+
+## Phase 2 — Do (45 min)
+
+- Create a Canva account (free tier is sufficient)
+- Design marketing materials for an imaginary event called "Future Forward Summit 2026":
+  1. Start with an Instagram square post template (1080×1080)
+  2. Customise: update the event name, date, location, and colour scheme to match your brand palette from Session 01
+  3. Use Magic Resize to generate: Instagram Story (1080×1920) and Twitter/X Header (1500×500)
+  4. Adjust each version so the text is still readable and elements aren't cropped
+- Export all three as PNG
+
+## Review
+
+You need to create assets for 6 different platforms from one core design. What Canva workflow produces all 6 in the least time? What limitations does this approach have?
+`;export{e as default};
